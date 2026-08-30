@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #12141c;
+  --ink-soft: #565f72;
+  --ink-faint: #8891a3;
+  --paper: #f7f8fb;
+  --paper-alt: #eff2f8;
+  --card: #ffffff;
+  --line: #e3e7f0;
+
+  --blue-50: #eaf0ff;
+  --blue-600: #2748dc;
+  --blue-700: #1b36b0;
+
+  --red-50: #fdebec;
+  --red-600: #c4291d;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
