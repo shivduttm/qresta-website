@@ -1,19 +1,22 @@
 import type { NextConfig } from 'next';
 
-// Static export — this is what keeps hosting genuinely flexible.
-// A statically-exported site is just plain HTML/CSS/JS files, so it
-// runs correctly on ordinary shared hosting (like a typical Hostinger
-// plan, which can't run a live Node.js server) just as well as on
-// Vercel or anywhere else. The demo request form still works fully —
-// it submits directly to the QResta API from the browser via fetch(),
-// which doesn't need a Next.js server to handle it.
+// Running as a real server on Railway now, not a static export — this
+// is what makes the rewrites() proxy below possible. qresta.in serves
+// this marketing site directly for everything except the app routes
+// below, which are transparently forwarded to the qresta-web service
+// over Railway's private network. The URL bar never changes; the
+// visitor never sees insightful-endurance.railway.internal.
 const nextConfig: NextConfig = {
-  output: 'export',
-  images: {
-    // Next's built-in image optimization needs a running server —
-    // not available in a static export, so this turns it off rather
-    // than the build silently failing on it.
-    unoptimized: true,
+  async rewrites() {
+    const APP_ORIGIN = 'http://insightful-endurance.railway.internal:8080';
+    return [
+      { source: '/login', destination: `${APP_ORIGIN}/login` },
+      { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
+      { source: '/dashboard', destination: `${APP_ORIGIN}/dashboard` },
+      { source: '/dashboard/:path*', destination: `${APP_ORIGIN}/dashboard/:path*` },
+      { source: '/menu/:path*', destination: `${APP_ORIGIN}/menu/:path*` },
+      { source: '/order/:path*', destination: `${APP_ORIGIN}/order/:path*` },
+    ];
   },
 };
 
