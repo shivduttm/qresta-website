@@ -13,7 +13,7 @@ export function SiteHeader() {
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src="/qresta-logo.png" alt="" className="w-9 h-9" />
+          <img src="/qresta-glyph.svg" alt="" className="w-9 h-9" />
           <span className="font-display text-xl font-bold">
             Q<span style={{ color: 'var(--blue-600)' }}>Resta</span>
           </span>

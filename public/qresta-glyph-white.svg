@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 436.8 436.8" width="437" height="437">
+<defs>
+<linearGradient id="gpi" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="437" y2="437">
+<stop offset="0" stop-color="#3E6DFF"/><stop offset="0.55" stop-color="#2447E6"/><stop offset="1" stop-color="#131F6B"/>
+</linearGradient>
+</defs>
+<rect width="436.8" height="436.8" fill="#FFFFFF"/>
+<rect x="124.0" y="34.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="169.0" y="34.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="214.0" y="34.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="79.0" y="79.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="259.0" y="79.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="34.0" y="124.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="304.0" y="124.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="34.0" y="169.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="304.0" y="169.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="34.0" y="214.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="304.0" y="214.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="79.0" y="259.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="259.0" y="259.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="124.0" y="304.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="169.0" y="304.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="214.0" y="304.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="304.0" y="304.0" width="39.0" height="39.0" rx="10.0" fill="url(#gpi)"/>
+<rect x="348.9" y="348.9" width="25.7" height="25.7" rx="6.6" fill="url(#gpi)"/>
+<rect x="386.4" y="386.4" width="16.4" height="16.4" rx="4.2" fill="url(#gpi)" opacity="0.92"/>
+</svg>

@@ -31,6 +31,18 @@ export const metadata: Metadata = {
   title: 'QResta | Restaurant SaaS Platform',
   description:
     'QResta helps restaurants manage QR menus, digital ordering, waiter panels, chef management and restaurant automation.',
+  // These cover the whole qresta.in domain, the proxied qresta-web
+  // routes included: only this app serves the root, so its /public is
+  // the one place root-level icon requests can resolve.
+  icons: {
+    icon: [
+      { url: '/qresta-glyph.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  manifest: '/manifest.webmanifest',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -49,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <img src="/qresta-logo.png" alt="" className="w-7 h-7" />
+                  <img src="/qresta-glyph.svg" alt="" className="w-8 h-8" />
                   <div className="font-display text-lg font-bold">
                     Q<span style={{ color: 'var(--blue-600)' }}>Resta</span>
                   </div>
