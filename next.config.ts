@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
       { source: '/dashboard/:path*', destination: `${APP_ORIGIN}/dashboard/:path*` },
       { source: '/menu/:path*', destination: `${APP_ORIGIN}/menu/:path*` },
       { source: '/order/:path*', destination: `${APP_ORIGIN}/order/:path*` },
+      // Offline stall menus. Printed QR codes point at /stall/<slug>,
+      // so without this rule every one of them would 404 here rather
+      // than reach qresta-web.
+      { source: '/stall/:path*', destination: `${APP_ORIGIN}/stall/:path*` },
       { source: '/app-assets/:path*', destination: `${APP_ORIGIN}/app-assets/:path*` },
     ];
   },
