@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { getPublicPlans, PublicPlan } from '@/lib/api';
 import { useLeadModals } from '@/components/lead-modals';
 
 const FEATURES = [
@@ -89,14 +88,7 @@ const FAQS = [
 
 export default function HomePage() {
   const { openDemoModal } = useLeadModals();
-  const [plans, setPlans] = useState<PublicPlan[] | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    getPublicPlans()
-      .then(setPlans)
-      .catch(() => setPlans([]));
-  }, []);
 
   return (
     <div>
@@ -287,41 +279,6 @@ export default function HomePage() {
               <p className="text-sm" style={{ color: 'var(--ink-soft)' }}>{s.body}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Pricing — genuinely live, not in the old static site */}
-      <section id="pricing" className="py-20" style={{ background: 'var(--card)' }}>
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="font-display text-3xl font-bold text-center mb-3">Pricing</h2>
-          <p className="text-center text-sm mb-12" style={{ color: 'var(--ink-soft)' }}>
-            Straightforward plans, no surprises.
-          </p>
-
-          {plans !== null && plans.length === 0 && (
-            <div className="text-center text-sm" style={{ color: 'var(--ink-soft)' }}>
-              Ask us about current pricing during your demo.
-            </div>
-          )}
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {plans?.map((plan) => (
-              <div key={plan.id} className="rounded-2xl p-6" style={{ background: 'var(--paper)', border: '1px solid var(--line)' }}>
-                <div className="font-display text-lg font-semibold mb-1">{plan.name}</div>
-                <div className="font-display text-3xl font-bold mb-3">
-                  ₹{plan.monthlyPrice}
-                  <span className="text-sm font-normal" style={{ color: 'var(--ink-faint)' }}> / month</span>
-                </div>
-                <ul className="text-sm grid gap-1.5" style={{ color: 'var(--ink-soft)' }}>
-                  {plan.features.maxBranches !== undefined && (
-                    <li>Up to {plan.features.maxBranches} branch{plan.features.maxBranches === 1 ? '' : 'es'}</li>
-                  )}
-                  {plan.features.maxTables !== undefined && <li>Up to {plan.features.maxTables} tables</li>}
-                  {plan.features.kdsEnabled && <li>Kitchen display included</li>}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

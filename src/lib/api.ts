@@ -42,21 +42,6 @@ export async function submitDemoRequest(payload: DemoRequestPayload): Promise<vo
   await handleResponse<unknown>(res);
 }
 
-export interface PublicPlan {
-  id: string;
-  name: string;
-  description: string | null;
-  monthlyPrice: string;
-  yearlyPrice: string | null;
-  features: { maxBranches?: number; maxTables?: number; kdsEnabled?: boolean };
-  trialDays: number;
-}
-
-export async function getPublicPlans(): Promise<PublicPlan[]> {
-  const res = await fetch(`${API_URL}/public/plans`);
-  return handleResponse<PublicPlan[]>(res);
-}
-
 // =========================================
 // CAREERS
 // =========================================
