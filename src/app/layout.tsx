@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Fraunces, Inter, IBM_Plex_Mono } from 'next/font/google';
+import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
+import { QrestaMark } from '@/components/brand';
 import { LeadModalsProvider } from '@/components/lead-modals';
 import { SiteHeader } from '@/components/site-header';
 
@@ -11,14 +12,9 @@ import { SiteHeader } from '@/components/site-header';
 // `@import url(...)` approach globals.css used before. Each one
 // exposes its own CSS variable, matching the --font-display/
 // --font-body/--font-mono names already used throughout the site.
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display',
-});
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-body',
 });
 const ibmPlexMono = IBM_Plex_Mono({
@@ -28,9 +24,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'QResta | Restaurant SaaS Platform',
+  title: 'Qresta | The restaurant operating system for India',
   description:
-    'QResta helps restaurants manage QR menus, digital ordering, waiter panels, chef management and restaurant automation.',
+    'Qresta runs billing, kitchen display, QR ordering, Zomato and Swiggy orders, inventory and reports on one platform — offline-first, GST-ready, built for Indian restaurants.',
   // These cover the whole qresta.in domain, the proxied qresta-web
   // routes included: only this app serves the root, so its /public is
   // the one place root-level icon requests can resolve.
@@ -45,71 +41,114 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
 };
 
+// Footer columns. Every href here resolves to a page this site actually
+// serves, or to a section anchor on the home page — a dead link in a
+// footer is worse than a missing one.
+const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string }> }> = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'POS billing', href: '/#modules' },
+      { label: 'Kitchen display', href: '/#modules' },
+      { label: 'QR ordering', href: '/#modules' },
+      { label: 'Online orders', href: '/#online-orders' },
+      { label: 'Inventory', href: '/#modules' },
+      { label: 'Reports & head office', href: '/#owner' },
+    ],
+  },
+  {
+    title: 'Solutions',
+    links: [
+      { label: 'Restaurants', href: '/#customers' },
+      { label: 'Cafés & QSR', href: '/#customers' },
+      { label: 'Cloud kitchens', href: '/#customers' },
+      { label: 'Food courts', href: '/#customers' },
+      { label: 'Hotels', href: '/#customers' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Founder', href: '/founder' },
+      { label: 'Careers', href: '/careers' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Book a demo', href: '/demo' },
+    ],
+  },
+];
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <body>
         <LeadModalsProvider>
           <SiteHeader />
 
           <main>{children}</main>
 
-          <footer
-            className="px-6 py-14 mt-20"
-            style={{ borderTop: '1px solid var(--line)', background: 'var(--card)' }}
-          >
-            <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <img src="/qresta-glyph.svg" alt="" className="w-8 h-8" />
-                  <div className="font-display text-lg font-bold">
-                    Q<span style={{ color: 'var(--blue-600)' }}>Resta</span>
+          <footer style={{ borderTop: '1px solid var(--line)', background: 'var(--paper-alt)' }}>
+            <div className="max-w-6xl mx-auto px-5 sm:px-6 py-14">
+              <div className="grid gap-10 lg:grid-cols-12">
+                <div className="lg:col-span-4">
+                  <Link href="/" className="inline-flex items-center gap-2.5">
+                    <QrestaMark size={32} />
+                    <span className="font-display text-lg font-bold tracking-tight">Qresta</span>
+                  </Link>
+                  <p className="text-sm mt-4 max-w-xs leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+                    The restaurant operating system for India — billing, kitchen, QR ordering,
+                    online orders, inventory and reports on one platform.
+                  </p>
+                  <div className="grid gap-1.5 text-sm mt-5" style={{ color: 'var(--ink-soft)' }}>
+                    <a href="mailto:info@qresta.in" className="hover:underline">
+                      info@qresta.in
+                    </a>
+                    <a href="tel:+918249190169" className="hover:underline">
+                      +91 82491 90169
+                    </a>
+                    <span style={{ color: 'var(--ink-faint)' }}>Odisha, India</span>
                   </div>
                 </div>
-                <p className="text-sm" style={{ color: 'var(--ink-soft)' }}>
-                  Restaurant QR menu, digital ordering, waiter app, chef panel and restaurant
-                  automation platform.
-                </p>
-              </div>
 
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: 'var(--ink-faint)' }}>
-                  Company
-                </div>
-                <div className="grid gap-2 text-sm" style={{ color: 'var(--ink-soft)' }}>
-                  <Link href="/about">About Us</Link>
-                  <Link href="/careers">Careers</Link>
-                  <Link href="/contact">Contact</Link>
-                </div>
-              </div>
-
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: 'var(--ink-faint)' }}>
-                  Legal
-                </div>
-                <div className="grid gap-2 text-sm" style={{ color: 'var(--ink-soft)' }}>
-                  <Link href="/privacy-policy">Privacy Policy</Link>
-                  <Link href="/terms">Terms &amp; Conditions</Link>
+                <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                  {FOOTER_COLUMNS.map((col) => (
+                    <div key={col.title}>
+                      <div
+                        className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] mb-4"
+                        style={{ color: 'var(--ink-faint)' }}
+                      >
+                        {col.title}
+                      </div>
+                      <div className="grid gap-2.5 text-sm" style={{ color: 'var(--ink-soft)' }}>
+                        {col.links.map((l) => (
+                          <Link key={l.label} href={l.href} className="hover:text-white transition-colors">
+                            {l.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: 'var(--ink-faint)' }}>
-                  Contact
-                </div>
-                <div className="grid gap-2 text-sm" style={{ color: 'var(--ink-soft)' }}>
-                  <a href="mailto:info@qresta.in">info@qresta.in</a>
-                  <a href="tel:+918249190169">+91 82491 90169</a>
-                  <span style={{ color: 'var(--ink-soft)' }}>Odisha, India</span>
-                </div>
+              <div
+                className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-6 text-xs"
+                style={{ borderTop: '1px solid var(--line)', color: 'var(--ink-faint)' }}
+              >
+                <span>© {new Date().getFullYear()} Qresta. All rights reserved.</span>
+                <span className="flex items-center gap-5">
+                  <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                    Privacy
+                  </Link>
+                  <Link href="/terms" className="hover:text-white transition-colors">
+                    Terms
+                  </Link>
+                  {/* Proxied to the app by next.config.ts — a plain anchor, not a Link. */}
+                  <a href="/login" className="hover:text-white transition-colors">
+                    Sign in
+                  </a>
+                </span>
               </div>
-            </div>
-
-            <div
-              className="max-w-6xl mx-auto text-center text-xs mt-10 pt-6"
-              style={{ borderTop: '1px solid var(--line)', color: 'var(--ink-faint)' }}
-            >
-              © {new Date().getFullYear()} QResta. All rights reserved.
             </div>
           </footer>
         </LeadModalsProvider>

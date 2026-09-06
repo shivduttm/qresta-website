@@ -68,9 +68,9 @@ export default function ContactPage() {
         style={{ background: 'linear-gradient(135deg, var(--blue-600), var(--blue-700))', color: '#fff' }}
       >
         <div className="max-w-2xl mx-auto px-6">
-          <h1 className="font-display text-4xl sm:text-5xl font-bold mb-4">Contact QResta</h1>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold mb-4">Contact Qresta</h1>
           <p className="text-lg" style={{ color: 'rgba(255,255,255,0.85)' }}>
-            Let&apos;s discuss how QResta can help digitise your restaurant operations, improve
+            Let&apos;s discuss how Qresta can help digitise your restaurant operations, improve
             customer experience and increase business growth.
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function ContactPage() {
               solution or a complete restaurant SaaS platform, our team is ready to help.
             </p>
             <div className="rounded-2xl p-6" style={{ background: 'var(--blue-50)' }}>
-              <div className="font-semibold text-sm mb-3">Why Restaurants Choose QResta</div>
+              <div className="font-semibold text-sm mb-3">Why Restaurants Choose Qresta</div>
               <ul className="grid gap-2 text-sm" style={{ color: 'var(--ink-soft)' }}>
                 {WHY_CHOOSE.map((w) => (
                   <li key={w} className="flex items-center gap-2">
@@ -117,7 +117,7 @@ export default function ContactPage() {
               <div className="py-10 text-center">
                 <div className="text-3xl mb-3">✓</div>
                 <div className="font-display text-lg font-semibold mb-1">
-                  Thank you for contacting QResta
+                  Thank you for contacting Qresta
                 </div>
                 <p className="text-sm" style={{ color: 'var(--ink-soft)' }}>
                   Our team will contact you shortly.
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   type="submit"
                   disabled={submitting}
                   className="w-full rounded-full py-3 text-sm font-semibold text-white disabled:opacity-60"
-                  style={{ background: 'var(--ink)' }}
+                  style={{ background: 'var(--blue-600)' }}
                 >
                   {submitting ? 'Sending…' : 'Send Enquiry'}
                 </button>
@@ -179,7 +179,7 @@ export default function ContactPage() {
             height="420"
             style={{ border: 0 }}
             loading="lazy"
-            title="QResta office location"
+            title="Qresta office location"
           />
         </div>
       </section>

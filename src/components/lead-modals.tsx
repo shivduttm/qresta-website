@@ -105,7 +105,7 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
             <p className="text-sm mt-1" style={{ color: 'var(--ink-soft)' }}>
               {isAppointment
                 ? "Pick a time that works and our team will confirm it with you."
-                : "Takes 20 minutes. We'll show you QResta running on a real menu."}
+                : "Takes 20 minutes. We'll show you Qresta running on a real menu."}
             </p>
           </div>
           <button onClick={onClose} className="text-sm font-semibold" style={{ color: 'var(--ink-soft)' }}>
@@ -232,7 +232,7 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
               type="submit"
               disabled={submitting}
               className="w-full rounded-full py-3 text-sm font-semibold text-white disabled:opacity-60"
-              style={{ background: 'var(--ink)' }}
+              style={{ background: 'var(--blue-600)' }}
             >
               {submitting ? 'Sending…' : isAppointment ? 'Confirm appointment' : 'Submit demo request'}
             </button>

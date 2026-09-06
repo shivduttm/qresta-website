@@ -59,7 +59,7 @@ export default function DemoRequestPage() {
     <div className="max-w-md mx-auto px-6 py-16">
       <h1 className="font-display text-3xl font-bold mb-2">Request a demo</h1>
       <p className="text-sm mb-8" style={{ color: 'var(--ink-soft)' }}>
-        Tell us a bit about your restaurant and we'll show you QResta running with your own setup.
+        Tell us a bit about your restaurant and we'll show you Qresta running with your own setup.
       </p>
 
       <form
@@ -136,7 +136,7 @@ export default function DemoRequestPage() {
           type="submit"
           disabled={submitting}
           className="w-full rounded-full py-3 text-sm font-semibold text-white disabled:opacity-60"
-          style={{ background: 'var(--ink)' }}
+          style={{ background: 'var(--blue-600)' }}
         >
           {submitting ? 'Sending…' : 'Request a demo'}
         </button>

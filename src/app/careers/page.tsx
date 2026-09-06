@@ -75,14 +75,14 @@ export default function CareersPage() {
       {/* Hero */}
       <section
         className="relative overflow-hidden pt-20 pb-16 text-center"
-        style={{ background: 'linear-gradient(135deg, var(--ink) 0%, #232840 100%)', color: '#fff' }}
+        style={{ background: 'linear-gradient(135deg, var(--blue-700) 0%, var(--blue-600) 100%)', color: '#fff' }}
       >
         <div className="max-w-2xl mx-auto px-6 relative">
           <div className="font-mono text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#ff9a5c' }}>
             We're hiring
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-bold mb-4">
-            Build your career with QResta
+            Build your career with Qresta
           </h1>
           <p className="text-lg" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Join our mission to transform restaurants across India through technology,
@@ -96,7 +96,7 @@ export default function CareersPage() {
           {/* Left: perks + open positions */}
           <div className="grid gap-6 content-start">
             <div className="rounded-2xl p-7" style={{ background: 'var(--card)', border: '1px solid var(--line)' }}>
-              <div className="font-display text-lg font-semibold mb-1">Why join QResta?</div>
+              <div className="font-display text-lg font-semibold mb-1">Why join Qresta?</div>
               <p className="text-sm mb-4" style={{ color: 'var(--ink-soft)' }}>
                 A growing team building for restaurants across India.
               </p>
@@ -256,7 +256,7 @@ export default function CareersPage() {
                   type="submit"
                   disabled={submitting}
                   className="w-full rounded-full py-3 text-sm font-semibold text-white disabled:opacity-60"
-                  style={{ background: 'var(--ink)' }}
+                  style={{ background: 'var(--blue-600)' }}
                 >
                   {submitting ? 'Submitting…' : 'Submit application'}
                 </button>

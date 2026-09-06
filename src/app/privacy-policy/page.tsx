@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | QResta',
-  description: 'How QResta collects, uses and protects your information.',
+  title: 'Privacy Policy | Qresta',
+  description: 'How Qresta collects, uses and protects your information.',
 };
 
 const SECTIONS = [
@@ -13,14 +13,14 @@ const SECTIONS = [
     body: (
       <>
         <p>
-          QResta Technologies ("QResta", "we", "us" or "our") operates the QResta restaurant
+          Qresta Technologies ("Qresta", "we", "us" or "our") operates the Qresta restaurant
           SaaS platform, including our website at <strong>qresta.in</strong> and related
           dashboards, mobile-optimised ordering pages, and support channels (together, the
           "Service").
         </p>
         <p>
           This Privacy Policy explains what information we collect from restaurant owners,
-          staff, guests who place orders through a QResta menu, job applicants, and visitors
+          staff, guests who place orders through a Qresta menu, job applicants, and visitors
           to our website, how we use that information, and the choices you have. By using
           the Service, you agree to the collection and use of information in accordance with
           this Policy.
@@ -39,7 +39,7 @@ const SECTIONS = [
           <li><strong>Account & business information:</strong> restaurant name, owner/contact name, email address, mobile number, city, and other details you provide when booking a demo, requesting an appointment, or signing up for the Service.</li>
           <li><strong>Order & menu data:</strong> menu items, prices, and order details processed through the platform when a guest scans a QR code and places an order.</li>
           <li><strong>Career application data:</strong> name, email, mobile number, the position applied for, your resume file, and any cover letter or message you submit through our Careers page.</li>
-          <li><strong>Payment information:</strong> subscription payments are processed by our third-party payment partners. QResta does not store your full card, UPI, or bank account details on our own servers.</li>
+          <li><strong>Payment information:</strong> subscription payments are processed by our third-party payment partners. Qresta does not store your full card, UPI, or bank account details on our own servers.</li>
           <li><strong>Technical & usage data:</strong> IP address, browser type, device information, pages visited, and similar usage data collected automatically through standard web logs and, where enabled, analytics tools.</li>
           <li><strong>Communications:</strong> records of correspondence when you contact our support or sales team by email, phone, or web form.</li>
         </ul>
@@ -54,7 +54,7 @@ const SECTIONS = [
       <>
         <p>We use the information we collect to:</p>
         <ul>
-          <li>Provide, operate, and maintain the QResta platform, including QR menus, order management, and the chef/waiter panels.</li>
+          <li>Provide, operate, and maintain the Qresta platform, including QR menus, order management, and the chef/waiter panels.</li>
           <li>Respond to demo requests, appointment bookings, and support enquiries.</li>
           <li>Process job applications and communicate with candidates about open roles.</li>
           <li>Send service-related notices, billing information, and updates about your account.</li>
@@ -203,7 +203,7 @@ export default function PrivacyPolicyPage() {
         </div>
         <h1 className="font-display text-4xl font-bold mb-3">Privacy Policy</h1>
         <p className="text-lg mb-4" style={{ color: 'var(--ink-soft)' }}>
-          How QResta collects, uses and protects your information.
+          How Qresta collects, uses and protects your information.
         </p>
         <span
           className="inline-block rounded-full px-4 py-1.5 text-xs font-semibold"

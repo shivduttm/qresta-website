@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | QResta',
-  description: 'The terms governing your use of the QResta platform.',
+  title: 'Terms & Conditions | Qresta',
+  description: 'The terms governing your use of the Qresta platform.',
 };
 
 const SECTIONS = [
@@ -12,9 +12,9 @@ const SECTIONS = [
     title: 'Acceptance of Terms',
     body: (
       <p>
-        These Terms & Conditions ("Terms") govern your access to and use of the QResta
+        These Terms & Conditions ("Terms") govern your access to and use of the Qresta
         website, dashboard, and related services (together, the "Service"), provided by
-        QResta Technologies ("QResta", "we", "us" or "our"). By accessing or using the
+        Qresta Technologies ("Qresta", "we", "us" or "our"). By accessing or using the
         Service, booking a demo, or signing up for an account, you agree to be bound by
         these Terms. If you do not agree, please do not use the Service.
       </p>
@@ -26,7 +26,7 @@ const SECTIONS = [
     title: 'Description of Service',
     body: (
       <p>
-        QResta provides a restaurant SaaS platform that includes QR-based digital menus,
+        Qresta provides a restaurant SaaS platform that includes QR-based digital menus,
         order and billing management, a chef and waiter panel, analytics, and related tools
         designed to help restaurants, cafes, hotels, food courts, and cloud kitchens manage
         their operations. We may add, change, or remove features of the Service from time
@@ -93,10 +93,10 @@ const SECTIONS = [
     title: 'Content & Intellectual Property',
     body: (
       <p>
-        The QResta name, logo, platform design, and underlying software are the property of
-        QResta Technologies and are protected by applicable intellectual property laws. You
+        The Qresta name, logo, platform design, and underlying software are the property of
+        Qresta Technologies and are protected by applicable intellectual property laws. You
         retain ownership of the menu content, images, and business information you upload,
-        and you grant QResta a limited licence to host, display, and process that content
+        and you grant Qresta a limited licence to host, display, and process that content
         solely for the purpose of operating the Service on your behalf.
       </p>
     ),
@@ -127,7 +127,7 @@ const SECTIONS = [
           completely secure.
         </p>
         <p>
-          To the maximum extent permitted by applicable law, QResta shall not be liable for
+          To the maximum extent permitted by applicable law, Qresta shall not be liable for
           any indirect, incidental, special, or consequential damages, or for any loss of
           revenue, profits, or data, arising out of or related to your use of the Service.
         </p>
@@ -140,7 +140,7 @@ const SECTIONS = [
     title: 'Indemnification',
     body: (
       <p>
-        You agree to indemnify and hold QResta and its officers, employees, and partners
+        You agree to indemnify and hold Qresta and its officers, employees, and partners
         harmless from any claims, damages, or expenses arising from your use of the Service,
         your violation of these Terms, or your violation of any rights of a third party.
       </p>
@@ -155,7 +155,7 @@ const SECTIONS = [
         You may stop using the Service or cancel your subscription at any time by contacting
         us. We may suspend or terminate access to the Service if these Terms are violated,
         if payment is not received as agreed, or where we reasonably believe continued
-        access poses a risk to QResta, other users, or the integrity of the Service.
+        access poses a risk to Qresta, other users, or the integrity of the Service.
       </p>
     ),
   },
@@ -212,7 +212,7 @@ export default function TermsPage() {
         </div>
         <h1 className="font-display text-4xl font-bold mb-3">Terms & Conditions</h1>
         <p className="text-lg mb-4" style={{ color: 'var(--ink-soft)' }}>
-          The terms governing your use of the QResta platform.
+          The terms governing your use of the Qresta platform.
         </p>
         <span
           className="inline-block rounded-full px-4 py-1.5 text-xs font-semibold"

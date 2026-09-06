@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Shivdutt Mohanty | Founder & CEO of QResta',
+  title: 'Shivdutt Mohanty | Founder & CEO of Qresta',
   description:
-    'Shivdutt Mohanty is the Founder & CEO of QResta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
+    'Shivdutt Mohanty is the Founder & CEO of Qresta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
 };
 
 export default function FounderPage() {
@@ -21,7 +21,7 @@ export default function FounderPage() {
             '@type': 'ProfilePage',
             '@id': 'https://qresta.in/founder#profilepage',
             url: 'https://qresta.in/founder',
-            name: 'Shivdutt Mohanty | Founder & CEO of QResta',
+            name: 'Shivdutt Mohanty | Founder & CEO of Qresta',
             mainEntity: {
               '@type': 'Person',
               '@id': 'https://qresta.in/founder#shivdutt-mohanty',
@@ -30,11 +30,11 @@ export default function FounderPage() {
               worksFor: {
                 '@type': 'Organization',
                 '@id': 'https://qresta.in/#organization',
-                name: 'QResta',
+                name: 'Qresta',
                 url: 'https://qresta.in/',
               },
               description:
-                'Shivdutt Mohanty is the Founder & CEO of QResta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
+                'Shivdutt Mohanty is the Founder & CEO of Qresta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
               url: 'https://qresta.in/founder',
             },
           }),
@@ -43,22 +43,22 @@ export default function FounderPage() {
 
       <h1 className="font-display text-3xl font-bold mb-1">Shivdutt Mohanty</h1>
       <p className="text-sm font-semibold mb-8" style={{ color: 'var(--blue-600)' }}>
-        Founder & CEO of QResta
+        Founder & CEO of Qresta
       </p>
 
       <div className="grid gap-6 text-sm" style={{ color: 'var(--ink-soft)' }}>
         <p>
-          Shivdutt Mohanty is the founder and CEO of QResta, a restaurant SaaS platform
+          Shivdutt Mohanty is the founder and CEO of Qresta, a restaurant SaaS platform
           focused on helping restaurants and cafes digitise their operations.
         </p>
         <p>
-          He started QResta with a straightforward goal: to make modern restaurant
+          He started Qresta with a straightforward goal: to make modern restaurant
           technology — digital menus, QR ordering, kitchen and waiter workflows,
           automation — accessible to businesses of every size, not just large chains
           with dedicated IT teams.
         </p>
         <p>
-          QResta itself reflects that goal directly: one platform covering digital
+          Qresta itself reflects that goal directly: one platform covering digital
           menus, QR ordering, waiter and chef operations, and the day-to-day
           automation a restaurant actually needs to run.
         </p>
@@ -66,10 +66,10 @@ export default function FounderPage() {
 
       <div className="grid gap-3 mt-10">
         <Link href="/" className="text-sm font-semibold" style={{ color: 'var(--blue-600)' }}>
-          ← Visit QResta
+          ← Visit Qresta
         </Link>
         <Link href="/about" className="text-sm font-semibold" style={{ color: 'var(--blue-600)' }}>
-          Learn more about QResta →
+          Learn more about Qresta →
         </Link>
       </div>
     </div>

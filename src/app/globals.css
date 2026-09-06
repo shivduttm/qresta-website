@@ -1,28 +1,142 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------
+   Qresta marketing site — deep-navy theme.
+
+   The token NAMES are the ones the whole site already uses (--ink,
+   --paper, --card, --line …); only their values changed when the site
+   moved to the dark treatment. Keeping the names meant every inner page
+   (about, careers, contact, demo, legal) followed along without being
+   rewritten. The blue scale is the same one the product app and the
+   Android apps use, so the marketing site and the thing you sign into
+   are visibly the same product.
+   --------------------------------------------------------------------- */
 :root {
-  --ink: #12141c;
-  --ink-soft: #565f72;
-  --ink-faint: #8891a3;
-  --paper: #f7f8fb;
-  --paper-alt: #eff2f8;
-  --card: #ffffff;
-  --line: #e3e7f0;
+  color-scheme: dark;
 
-  --blue-50: #eaf0ff;
-  --blue-600: #2748dc;
-  --blue-700: #1b36b0;
+  /* Surfaces, darkest first */
+  --paper: #060a17;
+  --paper-alt: #0a1024;
+  --card: #0e1630;
+  --card-alt: #131c3a;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
 
-  --red-50: #fdebec;
-  --red-600: #c4291d;
+  /* Text */
+  --ink: #edf1fb;
+  --ink-soft: #9dabcd;
+  --ink-faint: #6c7ca0;
+
+  /* Qresta blue */
+  --blue-900: #0b1f4b;
+  --blue-800: #10306e;
+  --blue-700: #1740a0;
+  --blue-600: #1e5eff;
+  --blue-500: #3b76ff;
+  --blue-50: rgba(30, 94, 255, 0.14);
+
+  /* Accents */
+  --green: #12b76a;
+  --amber: #f79009;
+  --red-600: #ff7a7a;
+  --red-50: rgba(255, 122, 122, 0.12);
 }
 
 body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* Headlines are the body grotesque at heavy weights and tight tracking,
+   not a separate display face — that is the look the dark treatment was
+   designed around. The class name stays because every page uses it. */
 .font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Form controls sit on transparent backgrounds throughout the site and
+   only ever set a border, which is invisible on a dark page — so the
+   fill, the caret and the placeholder are set once, here, instead of on
+   every input across five pages. */
+input,
+textarea,
+select {
+  background: var(--card-alt);
+  color: var(--ink);
+  border-radius: 10px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--blue-600);
+  outline-offset: 1px;
+}
+
+/* Native pickers (date/time in the appointment form) need the hint to
+   render their popups dark rather than white-on-white. */
+input[type='date'],
+input[type='time'] {
+  color-scheme: dark;
+}
+
+::selection {
+  background: var(--blue-600);
+  color: #fff;
+}
+
+/* ------------------------------ helpers ------------------------------ */
+
+/* The faint engineering grid behind the hero. */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Blue bloom behind the hero headline and the closing CTA. */
+.glow {
+  background: radial-gradient(circle, rgba(30, 94, 255, 0.35) 0%, rgba(30, 94, 255, 0) 68%);
+  filter: blur(8px);
+}
+
+/* Hairline top edge that makes a card read as lit from above. */
+.card-lit {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 60%), var(--card);
+  border: 1px solid var(--line);
+}
+
+/* Wide UI mockups scroll inside themselves rather than pushing the page
+   sideways on a phone. */
+.scroll-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
