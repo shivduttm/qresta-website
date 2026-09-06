@@ -79,8 +79,14 @@ export const metadata: Metadata = {
   // the one place root-level icon requests can resolve.
   icons: {
     icon: [
+      // Google wants a square favicon of at least 48px for search
+      // results, so the .ico carries 16/32/48 and the PNGs cover the
+      // larger slots; the SVG is what modern browsers actually use.
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
       { url: '/qresta-glyph.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     shortcut: ['/favicon.ico'],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],

@@ -2,35 +2,47 @@
 //
 // qresta.in serves this marketing site at the root but proxies /login,
 // /dashboard, /menu and friends through to the app, so an <img src="/...">
-// is fine here — yet inlining still wins: the mark appears in the header
-// of every page and in the hero, and an inline SVG costs no request and
-// can take its colours from the surrounding theme.
+// would work here — yet inlining still wins: the mark appears in the
+// header of every page and in the hero, and an inline SVG costs no
+// request and can take its colours from the surrounding theme.
 //
-// Geometry is lifted verbatim from public/qresta-glyph.svg so the pixel Q
-// is identical to the one on the app, the APKs and the favicon.
+// Geometry matches qresta-web/src/components/brand.tsx exactly (the mark
+// on the login page) and public/qresta-glyph.svg, which the favicon and
+// the app icons are rendered from. Change it in one place and the others
+// have to follow, or the tab icon stops matching the header.
 
-const Q_PIXELS: Array<[number, number, number, number]> = [
-  // [x, y, size, radius]
-  [124, 34, 39, 10],
-  [169, 34, 39, 10],
-  [214, 34, 39, 10],
-  [79, 79, 39, 10],
-  [259, 79, 39, 10],
-  [34, 124, 39, 10],
-  [304, 124, 39, 10],
-  [34, 169, 39, 10],
-  [304, 169, 39, 10],
-  [34, 214, 39, 10],
-  [304, 214, 39, 10],
-  [79, 259, 39, 10],
-  [259, 259, 39, 10],
-  [124, 304, 39, 10],
-  [169, 304, 39, 10],
-  [214, 304, 39, 10],
-  [304, 304, 39, 10],
-  [348.9, 348.9, 25.7, 6.6],
-  [386.4, 386.4, 16.4, 4.2],
+const CELLS: Array<[number, number]> = [
+  [269, 69],
+  [369, 69],
+  [469, 69],
+  [169, 169],
+  [569, 169],
+  [69, 269],
+  [669, 269],
+  [69, 369],
+  [669, 369],
+  [69, 469],
+  [669, 469],
+  [169, 569],
+  [569, 569],
+  [269, 669],
+  [369, 669],
+  [469, 669],
+  [669, 669],
 ];
+
+/** The pixel Q itself: 17 cells plus the two tapering tail squares. */
+function QPath({ fill, scale = 0.62, offset = 195 }: { fill: string; scale?: number; offset?: number }) {
+  return (
+    <g transform={`translate(${offset} ${offset}) scale(${scale})`} fill={fill}>
+      {CELLS.map(([x, y]) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width={86} height={86} rx={18} />
+      ))}
+      <rect x={769} y={769} width={70} height={70} rx={15} />
+      <rect x={855} y={855} width={56} height={56} rx={12} />
+    </g>
+  );
+}
 
 /** White pixel Q on a Qresta-blue rounded tile — the app-icon lockup. */
 export function QrestaMark({ size = 36, className = '' }: { size?: number; className?: string }) {
@@ -38,23 +50,13 @@ export function QrestaMark({ size = 36, className = '' }: { size?: number; class
     <svg
       width={size}
       height={size}
-      viewBox="0 0 436.8 436.8"
+      viewBox="0 0 1024 1024"
       className={className}
       aria-hidden="true"
       focusable="false"
     >
-      <defs>
-        <linearGradient id="qrestaTile" x1="0" y1="0" x2="437" y2="437" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#3B76FF" />
-          <stop offset="1" stopColor="#1E5EFF" />
-        </linearGradient>
-      </defs>
-      <rect width="436.8" height="436.8" rx="96" fill="url(#qrestaTile)" />
-      <g transform="translate(218.4 218.4) scale(0.78) translate(-218.4 -218.4)">
-        {Q_PIXELS.map(([x, y, s, r]) => (
-          <rect key={`${x}-${y}`} x={x} y={y} width={s} height={s} rx={r} fill="#FFFFFF" />
-        ))}
-      </g>
+      <rect width="1024" height="1024" rx="220" fill="#1E5EFF" />
+      <QPath fill="#FFFFFF" />
     </svg>
   );
 }
@@ -62,10 +64,8 @@ export function QrestaMark({ size = 36, className = '' }: { size?: number; class
 /** The bare pixel Q, no tile — for footers and watermarks. */
 export function QrestaGlyph({ size = 24, color = 'currentColor' }: { size?: number; color?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 436.8 436.8" aria-hidden="true" focusable="false">
-      {Q_PIXELS.map(([x, y, s, r]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width={s} height={s} rx={r} fill={color} />
-      ))}
+    <svg width={size} height={size} viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+      <QPath fill={color} scale={1} offset={0} />
     </svg>
   );
 }
