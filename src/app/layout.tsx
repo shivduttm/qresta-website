@@ -5,6 +5,8 @@ import './globals.css';
 import { QrestaMark } from '@/components/brand';
 import { LeadModalsProvider } from '@/components/lead-modals';
 import { SiteHeader } from '@/components/site-header';
+import { StructuredData } from '@/components/structured-data';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 
 // Next's own font loader — self-hosts the font files at build time
 // (no runtime request to Google's servers) and avoids the CSS
@@ -24,9 +26,54 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Qresta | The restaurant operating system for India',
-  description:
-    'Qresta runs billing, kitchen display, QR ordering, Zomato and Swiggy orders, inventory and reports on one platform — offline-first, GST-ready, built for Indian restaurants.',
+  // Lets every page give a relative canonical / OG image URL and have
+  // Next resolve it against the live origin.
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    // Page titles read "About Qresta · Qresta" style without each page
+    // having to repeat the brand.
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: { canonical: '/' },
+  keywords: [
+    'restaurant POS India',
+    'restaurant billing software',
+    'QR menu ordering',
+    'kitchen display system',
+    'Zomato Swiggy order management',
+    'restaurant inventory software',
+    'GST billing for restaurants',
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  // Google Search Console's "HTML tag" verification. Set
+  // GOOGLE_SITE_VERIFICATION on the Railway service to the token Google
+  // gives you and redeploy; leaving it unset simply omits the tag.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   // These cover the whole qresta.in domain, the proxied qresta-web
   // routes included: only this app serves the root, so its /public is
   // the one place root-level icon requests can resolve.
@@ -80,8 +127,9 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href:
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <body>
+        <StructuredData />
         <LeadModalsProvider>
           <SiteHeader />
 

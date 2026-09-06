@@ -1,42 +1,41 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FOUNDER, SITE_NAME, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Shivdutt Mohanty | Founder & CEO of Qresta',
-  description:
-    'Shivdutt Mohanty is the Founder & CEO of Qresta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
+  // Absolute, so this page reads as "Shivdutt Mohanty | Founder & CEO
+  // of Qresta" in results rather than picking up the "· Qresta" suffix
+  // the root layout appends to every other page.
+  title: { absolute: `${FOUNDER.name} | ${FOUNDER.jobTitle} of ${SITE_NAME}` },
+  description: FOUNDER.description,
+  alternates: { canonical: '/founder' },
+  openGraph: {
+    type: 'profile',
+    title: `${FOUNDER.name} | ${FOUNDER.jobTitle} of ${SITE_NAME}`,
+    description: FOUNDER.description,
+    url: '/founder',
+  },
 };
 
 export default function FounderPage() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-20">
-      {/* Structured data — genuinely useful for search engines, kept
-          from the original page even though the prose below was
-          rewritten to not just repeat the same two facts five times. */}
+      {/* Marks this page as the canonical profile of the person. The
+          Person and Organization nodes themselves are defined once in
+          the site-wide graph (components/structured-data.tsx); this
+          only points at them by @id, so the facts live in one place. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ProfilePage',
-            '@id': 'https://qresta.in/founder#profilepage',
-            url: 'https://qresta.in/founder',
-            name: 'Shivdutt Mohanty | Founder & CEO of Qresta',
-            mainEntity: {
-              '@type': 'Person',
-              '@id': 'https://qresta.in/founder#shivdutt-mohanty',
-              name: 'Shivdutt Mohanty',
-              jobTitle: 'Founder & CEO',
-              worksFor: {
-                '@type': 'Organization',
-                '@id': 'https://qresta.in/#organization',
-                name: 'Qresta',
-                url: 'https://qresta.in/',
-              },
-              description:
-                'Shivdutt Mohanty is the Founder & CEO of Qresta, a restaurant SaaS platform helping restaurants and cafes digitise their operations.',
-              url: 'https://qresta.in/founder',
-            },
+            '@id': `${SITE_URL}/founder#profilepage`,
+            url: FOUNDER.url,
+            name: `${FOUNDER.name} | ${FOUNDER.jobTitle} of ${SITE_NAME}`,
+            isPartOf: { '@id': `${SITE_URL}/#website` },
+            about: { '@id': FOUNDER.id },
+            mainEntity: { '@id': FOUNDER.id },
           }),
         }}
       />

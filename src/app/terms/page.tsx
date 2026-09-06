@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | Qresta',
+  title: 'Terms & Conditions',
   description: 'The terms governing your use of the Qresta platform.',
+  alternates: { canonical: '/terms' },
 };
 
 const SECTIONS = [

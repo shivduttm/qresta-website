@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Qresta',
+  title: 'Privacy Policy',
   description: 'How Qresta collects, uses and protects your information.',
+  alternates: { canonical: '/privacy-policy' },
 };
 
 const SECTIONS = [
