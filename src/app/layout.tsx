@@ -197,10 +197,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Link href="/terms" className="hover:text-white transition-colors">
                     Terms
                   </Link>
-                  {/* Proxied to the app by next.config.ts — a plain anchor, not a Link. */}
-                  <a href="/login" className="hover:text-white transition-colors">
-                    Sign in
-                  </a>
                 </span>
               </div>
             </div>

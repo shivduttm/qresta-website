@@ -111,17 +111,11 @@ export function SiteHeader() {
           )}
         </div>
 
+        {/* No sign-in link here on purpose: qresta.in is the marketing
+            site, and staff reach the app directly. /login still exists and
+            is still proxied through by next.config.ts — it is simply not
+            advertised to visitors. */}
         <div className="flex items-center gap-2 flex-shrink-0">
-          {/* /login is proxied through to the app by next.config.ts, so it
-              stays a plain anchor — a client-side Link would try to route
-              it inside this app and 404. */}
-          <a
-            href="/login"
-            className="hidden sm:inline-flex rounded-xl px-4 py-2 text-sm font-semibold transition-colors hover:bg-white/5"
-            style={{ border: '1px solid var(--line-strong)' }}
-          >
-            Sign in
-          </a>
           <button
             onClick={openDemoModal}
             className="rounded-xl px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -164,9 +158,6 @@ export function SiteHeader() {
             <Link href="/about" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               Company
             </Link>
-            <a href="/login" className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
-              Sign in
-            </a>
           </div>
         </div>
       )}
