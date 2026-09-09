@@ -99,3 +99,30 @@ export function QrestaLockup({
     </span>
   );
 }
+
+/**
+ * The FitBizz mark — same geometry as fitbizz-web/src/components/brand.tsx
+ * (a blue tile with a dumbbell between two arcs), inlined here so the
+ * marketing site never depends on an asset served by the other app.
+ */
+export function FitBizzMark({ size = 40, title = 'FitBizz', tile = true }: { size?: number; title?: string; tile?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" role="img" aria-label={title} style={{ flexShrink: 0 }}>
+      {tile && <rect width="48" height="48" rx="12" fill="#1E5EFF" />}
+      <path d="M13 24c0-6.1 4.9-11 11-11 3.6 0 6.8 1.7 8.8 4.4" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
+      <path d="M35 24c0 6.1-4.9 11-11 11-3.6 0-6.8-1.7-8.8-4.4" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" opacity="0.7" />
+      <rect x="15" y="21" width="18" height="6" rx="2" fill="#fff" />
+      <rect x="11" y="19" width="4" height="10" rx="1.5" fill="#fff" />
+      <rect x="33" y="19" width="4" height="10" rx="1.5" fill="#fff" />
+    </svg>
+  );
+}
+
+/** "FitBizz" set the way the product sets it: Fit in white, Bizz in light blue. */
+export function FitBizzWordmark({ size = 20 }: { size?: number }) {
+  return (
+    <span className="font-display font-extrabold leading-none" style={{ fontSize: size, letterSpacing: '-0.5px' }}>
+      Fit<span style={{ color: '#8FB0FF' }}>Bizz</span>
+    </span>
+  );
+}

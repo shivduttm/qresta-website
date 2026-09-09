@@ -87,6 +87,17 @@ export function SiteHeader() {
             onToggle={() => setOpen(open === 'solutions' ? null : 'solutions')}
           />
           <NavLink href="/#customers">Customers</NavLink>
+          <NavLink href="/fitbizz">
+            <span className="inline-flex items-center gap-1.5">
+              FitBizz
+              <span
+                className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] rounded px-1 py-0.5"
+                style={{ background: 'var(--blue-50)', color: 'var(--blue-500)' }}
+              >
+                Gyms
+              </span>
+            </span>
+          </NavLink>
           <NavLink href="/about">Company</NavLink>
 
           {open && (
@@ -154,6 +165,9 @@ export function SiteHeader() {
             ))}
             <Link href="/#customers" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               Customers
+            </Link>
+            <Link href="/fitbizz" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
+              FitBizz for gyms
             </Link>
             <Link href="/about" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               Company

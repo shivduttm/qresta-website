@@ -46,6 +46,8 @@ export const metadata: Metadata = {
     'Zomato Swiggy order management',
     'restaurant inventory software',
     'GST billing for restaurants',
+    'gym management software India',
+    'FitBizz gym software',
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -97,7 +99,10 @@ export const metadata: Metadata = {
 // Footer columns. Every href here resolves to a page this site actually
 // serves, or to a section anchor on the home page — a dead link in a
 // footer is worse than a missing one.
-const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string }> }> = [
+// `app: true` marks a route served by proxying to another service; those
+// must be plain <a> tags — a client-side <Link> would route inside this
+// app and 404.
+const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string; app?: boolean }> }> = [
   {
     title: 'Product',
     links: [
@@ -117,6 +122,16 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href:
       { label: 'Cloud kitchens', href: '/#customers' },
       { label: 'Food courts', href: '/#customers' },
       { label: 'Hotels', href: '/#customers' },
+    ],
+  },
+  {
+    title: 'FitBizz',
+    links: [
+      { label: 'Gym management software', href: '/fitbizz' },
+      { label: 'Members & check-in', href: '/fitbizz#modules' },
+      { label: 'Your own payment gateway', href: '/fitbizz#payments' },
+      { label: 'Create a gym account', href: '/fitbizz/register', app: true },
+      { label: 'Sign in to FitBizz', href: '/fitbizz/login', app: true },
     ],
   },
   {
@@ -151,7 +166,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </Link>
                   <p className="text-sm mt-4 max-w-xs leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
                     The restaurant operating system for India — billing, kitchen, QR ordering,
-                    online orders, inventory and reports on one platform.
+                    online orders, inventory and reports on one platform. And FitBizz, the same
+                    care applied to gyms.
                   </p>
                   <div className="grid gap-1.5 text-sm mt-5" style={{ color: 'var(--ink-soft)' }}>
                     <a href="mailto:info@qresta.in" className="hover:underline">
@@ -164,7 +180,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </div>
                 </div>
 
-                <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
                   {FOOTER_COLUMNS.map((col) => (
                     <div key={col.title}>
                       <div
@@ -174,11 +190,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         {col.title}
                       </div>
                       <div className="grid gap-2.5 text-sm" style={{ color: 'var(--ink-soft)' }}>
-                        {col.links.map((l) => (
-                          <Link key={l.label} href={l.href} className="hover:text-white transition-colors">
-                            {l.label}
-                          </Link>
-                        ))}
+                        {col.links.map((l) =>
+                          l.app ? (
+                            <a key={l.label} href={l.href} className="hover:text-white transition-colors">
+                              {l.label}
+                            </a>
+                          ) : (
+                            <Link key={l.label} href={l.href} className="hover:text-white transition-colors">
+                              {l.label}
+                            </Link>
+                          ),
+                        )}
                       </div>
                     </div>
                   ))}

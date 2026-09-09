@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLeadModals } from '@/components/lead-modals';
+import { FitBizzMark, FitBizzWordmark } from '@/components/brand';
 import { QrestaMark } from '@/components/brand';
 
 /* =====================================================================
@@ -112,6 +113,13 @@ const CUSTOMER_TYPES = [
  */
 const TESTIMONIALS: Array<{ quote: string; name: string; role: string }> = [];
 
+/** The second product, teased once on the home page and sold on /fitbizz. */
+const FITBIZZ_POINTS = [
+  'Memberships, QR and biometric check-in, trainers and PT',
+  'GST invoices, payment links and a supplements POS',
+  'Members pay into the gym’s own payment gateway',
+];
+
 /* ===================================================================== */
 
 export default function HomePage() {
@@ -128,6 +136,7 @@ export default function HomePage() {
       <ProductFacts />
       <Customers />
       {TESTIMONIALS.length > 0 && <Testimonials />}
+      <FitBizzTeaser />
       <ClosingCta onDemo={openDemoModal} />
     </div>
   );
@@ -985,6 +994,53 @@ function Testimonials() {
           </figure>
         ))}
       </div>
+    </section>
+  );
+}
+
+/** One card for the other product, so a gym owner who lands here finds
+ *  their way — without turning the restaurant page into a catalogue. */
+function FitBizzTeaser() {
+  return (
+    <section className="max-w-6xl mx-auto px-5 sm:px-6 pb-16 sm:pb-20">
+      <Link
+        href="/fitbizz"
+        className="group grid lg:grid-cols-12 gap-6 lg:gap-10 items-center rounded-3xl p-6 sm:p-8 card-lit transition-colors hover:bg-white/[0.03]"
+      >
+        <div className="lg:col-span-7">
+          <div className="flex items-center gap-2 mb-4">
+            <FitBizzMark size={30} />
+            <FitBizzWordmark size={18} />
+            <span
+              className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] rounded px-1.5 py-0.5 ml-1"
+              style={{ background: 'var(--blue-50)', color: 'var(--blue-500)' }}
+            >
+              Also from Qresta
+            </span>
+          </div>
+          <h2 className="font-display font-bold mb-3" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            Run a gym or a studio? The same care, built for the fitness floor.
+          </h2>
+          <p className="text-sm sm:text-base mb-5" style={{ color: 'var(--ink-soft)', maxWidth: 560 }}>
+            FitBizz is our gym management software: the front desk, the trainers and the owner on
+            one system, with every rupee your members pay settling into your own account.
+          </p>
+          <span className="inline-flex items-center gap-2 text-sm font-bold" style={{ color: 'var(--blue-500)' }}>
+            Explore FitBizz
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+          </span>
+        </div>
+        <div className="lg:col-span-5 grid gap-2.5">
+          {FITBIZZ_POINTS.map((p) => (
+            <div key={p} className="flex items-start gap-3 rounded-xl px-4 py-3" style={{ background: 'var(--paper-alt)', border: '1px solid var(--line)' }}>
+              <Check />
+              <span className="text-sm" style={{ color: 'var(--ink-soft)' }}>
+                {p}
+              </span>
+            </div>
+          ))}
+        </div>
+      </Link>
     </section>
   );
 }

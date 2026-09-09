@@ -32,7 +32,9 @@ const nextConfig: NextConfig = {
       // than reach qresta-web.
       { source: '/stall/:path*', destination: `${APP_ORIGIN}/stall/:path*` },
       { source: '/app-assets/:path*', destination: `${APP_ORIGIN}/app-assets/:path*` },
-      { source: '/fitbizz', destination: `${FITBIZZ_ORIGIN}/fitbizz` },
+      // Only the sub-paths are forwarded: bare /fitbizz is the product's
+      // marketing page, rendered by this site (src/app/fitbizz). The app's
+      // own root merely redirected to /fitbizz/login anyway.
       { source: '/fitbizz/:path*', destination: `${FITBIZZ_ORIGIN}/fitbizz/:path*` },
     ];
   },

@@ -3,8 +3,12 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { submitDemoRequest, ApiError } from '@/lib/api';
 
+/** Which product the lead is about — changes the form's wording and tags the request. */
+export type LeadProduct = 'qresta' | 'fitbizz';
+
 interface LeadModalsContextValue {
-  openDemoModal: () => void;
+  /** Pass 'fitbizz' for gym leads; anything else (including a click event) means Qresta. */
+  openDemoModal: (product?: LeadProduct | unknown) => void;
   openAppointmentModal: () => void;
 }
 
@@ -16,26 +20,32 @@ export function useLeadModals() {
   return ctx;
 }
 
-type ModalKind = 'demo' | 'appointment' | null;
+type ModalKind = 'demo' | 'appointment';
 
 export function LeadModalsProvider({ children }: { children: ReactNode }) {
-  const [open, setOpen] = useState<ModalKind>(null);
+  const [open, setOpen] = useState<{ kind: ModalKind; product: LeadProduct } | null>(null);
 
   return (
     <LeadModalsContext.Provider
       value={{
-        openDemoModal: () => setOpen('demo'),
-        openAppointmentModal: () => setOpen('appointment'),
+        // Callers often pass this straight to onClick, so the argument
+        // may be a MouseEvent — only the literal 'fitbizz' switches product.
+        openDemoModal: (product) => setOpen({ kind: 'demo', product: product === 'fitbizz' ? 'fitbizz' : 'qresta' }),
+        openAppointmentModal: () => setOpen({ kind: 'appointment', product: 'qresta' }),
       }}
     >
       {children}
-      {open && <LeadModal kind={open} onClose={() => setOpen(null)} />}
+      {open && <LeadModal kind={open.kind} product={open.product} onClose={() => setOpen(null)} />}
     </LeadModalsContext.Provider>
   );
 }
 
-function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: () => void }) {
+function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadProduct; onClose: () => void }) {
   const isAppointment = kind === 'appointment';
+  const isGym = product === 'fitbizz';
+  // The lead queue on the dashboard is shared, so a gym request says so
+  // in its first line — the API has no product field of its own.
+  const productTag = isGym ? '[FitBizz] ' : '';
 
   const [restaurantName, setRestaurantName] = useState('');
   const [ownerName, setOwnerName] = useState('');
@@ -71,7 +81,7 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
         email: email.trim(),
         phone: mobile.trim(),
         restaurantName: restaurantName.trim(),
-        message: message.trim() || undefined,
+        message: productTag + (message.trim() || (isGym ? 'Gym demo request' : '')) || undefined,
         type: kind,
         preferredDate: isAppointment ? appointmentDate : undefined,
         preferredTime: isAppointment ? appointmentTime : undefined,
@@ -100,12 +110,14 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
         <div className="flex items-start justify-between mb-1">
           <div>
             <h2 className="font-display text-xl font-semibold">
-              {isAppointment ? 'Book an appointment' : 'Book your free demo'}
+              {isAppointment ? 'Book an appointment' : isGym ? 'See FitBizz on your gym' : 'Book your free demo'}
             </h2>
             <p className="text-sm mt-1" style={{ color: 'var(--ink-soft)' }}>
               {isAppointment
                 ? "Pick a time that works and our team will confirm it with you."
-                : "Takes 20 minutes. We'll show you Qresta running on a real menu."}
+                : isGym
+                  ? "Takes 20 minutes. We'll walk through memberships, check-in and billing set up for a gym like yours."
+                  : "Takes 20 minutes. We'll show you Qresta running on a real menu."}
             </p>
           </div>
           <button onClick={onClose} className="text-sm font-semibold" style={{ color: 'var(--ink-soft)' }}>
@@ -151,7 +163,7 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
               <input
                 value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
-                placeholder="Restaurant Name"
+                placeholder={isGym ? 'Gym / studio name' : 'Restaurant Name'}
                 required
                 className="rounded-lg px-3 py-2.5 text-sm outline-none"
                 style={{ border: '1.5px solid var(--line)' }}
@@ -222,7 +234,7 @@ function LeadModal({ kind, onClose }: { kind: 'demo' | 'appointment'; onClose: (
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder={isAppointment ? 'Notes (optional)' : 'Tell us about your restaurant (optional)'}
+              placeholder={isAppointment ? 'Notes (optional)' : isGym ? 'Tell us about your gym — members, branches, what you use today (optional)' : 'Tell us about your restaurant (optional)'}
               rows={3}
               className="w-full rounded-lg px-3 py-2.5 text-sm outline-none mb-4"
               style={{ border: '1.5px solid var(--line)' }}

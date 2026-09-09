@@ -50,6 +50,7 @@ export const FOUNDER_PROFILES: string[] = [];
 /** Every indexable page, in the order they matter. Feeds the sitemap. */
 export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }> = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
+  { path: '/fitbizz', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/founder', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
@@ -64,4 +65,36 @@ export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'w
  * next.config.ts). They are private, per-session or per-table surfaces
  * with nothing to rank for, so they stay out of the index.
  */
-export const DISALLOWED_PATHS = ['/dashboard', '/login', '/forgot-password', '/menu/', '/order/', '/stall/', '/app-assets/', '/api/'];
+export const DISALLOWED_PATHS = [
+  '/dashboard',
+  '/login',
+  '/forgot-password',
+  '/menu/',
+  '/order/',
+  '/stall/',
+  '/app-assets/',
+  '/api/',
+  // FitBizz's own app routes, proxied the same way. /fitbizz itself is
+  // the product page this site renders and stays indexable.
+  '/fitbizz/login',
+  '/fitbizz/register',
+  '/fitbizz/forgot-password',
+  '/fitbizz/dashboard',
+  '/fitbizz/kiosk',
+  '/fitbizz/pay/',
+  '/fitbizz/_next/',
+];
+
+/**
+ * The second product. Sold from qresta.in/fitbizz; the app itself is a
+ * separate service reached through the same proxy (see next.config.ts).
+ */
+export const FITBIZZ = {
+  name: 'FitBizz',
+  tagline: 'Gym management software by Qresta',
+  description:
+    'FitBizz runs memberships, QR and biometric check-in, trainers and personal training, GST invoicing, a supplements POS, leads and reports for gyms and fitness studios — with members paying into the gym’s own payment gateway.',
+  path: '/fitbizz',
+  loginPath: '/fitbizz/login',
+  registerPath: '/fitbizz/register',
+} as const;
