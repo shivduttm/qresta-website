@@ -15,6 +15,11 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   async rewrites() {
     const APP_ORIGIN = 'http://insightful-endurance.railway.internal:8080';
+    // FitBizz (gym management) is a separate Next.js service built with
+    // basePath '/fitbizz', so every page and asset of it lives under that
+    // one prefix — qresta.in/fitbizz/login, /fitbizz/dashboard, and its
+    // /fitbizz/_next/* chunks — and a single rule forwards all of it.
+    const FITBIZZ_ORIGIN = 'http://fitbizz-web.railway.internal:8080';
     return [
       { source: '/login', destination: `${APP_ORIGIN}/login` },
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
@@ -27,6 +32,8 @@ const nextConfig: NextConfig = {
       // than reach qresta-web.
       { source: '/stall/:path*', destination: `${APP_ORIGIN}/stall/:path*` },
       { source: '/app-assets/:path*', destination: `${APP_ORIGIN}/app-assets/:path*` },
+      { source: '/fitbizz', destination: `${FITBIZZ_ORIGIN}/fitbizz` },
+      { source: '/fitbizz/:path*', destination: `${FITBIZZ_ORIGIN}/fitbizz/:path*` },
     ];
   },
 };
