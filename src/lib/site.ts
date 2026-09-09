@@ -91,6 +91,8 @@ export const DISALLOWED_PATHS = [
  */
 export const FITBIZZ = {
   name: 'FitBizz',
+  /** The phrase the product is searched for and listed under. */
+  brandName: 'FitBizz by Qresta',
   tagline: 'Gym management software by Qresta',
   description:
     'FitBizz runs memberships, QR and biometric check-in, trainers and personal training, GST invoicing, a supplements POS, leads and reports for gyms and fitness studios — with members paying into the gym’s own payment gateway.',

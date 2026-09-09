@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLeadModals } from '@/components/lead-modals';
-import { FitBizzMark, FitBizzWordmark } from '@/components/brand';
+import { FitBizzMark } from '@/components/brand';
 import { FITBIZZ } from '@/lib/site';
 
 /* =====================================================================
@@ -131,9 +131,9 @@ function Hero({ onDemo }: { onDemo: () => void }) {
           style={{ background: 'var(--blue-50)', border: '1px solid var(--line-strong)', color: 'var(--ink)' }}
         >
           <FitBizzMark size={18} />
-          <FitBizzWordmark size={13} />
+          <span>{FITBIZZ.brandName}</span>
           <span style={{ color: 'var(--ink-faint)' }}>·</span>
-          Gym management software by Qresta
+          Gym management software
         </div>
 
         <h1

@@ -5,10 +5,14 @@ import { CONTACT, FITBIZZ, SITE_NAME, SITE_URL } from '@/lib/site';
 // Thin server wrapper (the content is a client component and cannot
 // export metadata) — the same pattern as the home page and /about.
 export const metadata: Metadata = {
-  title: `${FITBIZZ.name} — gym management software`,
+  // Absolute: the layout template would append '· Qresta' to a title
+  // that already carries the brand phrase.
+  title: { absolute: `${FITBIZZ.brandName} | Gym management software` },
   description: FITBIZZ.description,
   alternates: { canonical: FITBIZZ.path },
   keywords: [
+    'FitBizz by Qresta',
+    'FitBizz',
     'gym management software India',
     'gym membership software',
     'gym billing software GST',
@@ -19,14 +23,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: SITE_NAME,
-    title: `${FITBIZZ.name} — gym management software by ${SITE_NAME}`,
+    title: `${FITBIZZ.brandName} | Gym management software`,
     description: FITBIZZ.description,
     url: `${SITE_URL}${FITBIZZ.path}`,
     locale: 'en_IN',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${FITBIZZ.name} — gym management software by ${SITE_NAME}`,
+    title: `${FITBIZZ.brandName} | Gym management software`,
     description: FITBIZZ.description,
   },
 };
@@ -40,7 +44,8 @@ export default function Page() {
     '@type': 'SoftwareApplication',
     '@id': `${SITE_URL}${FITBIZZ.path}#software`,
     name: FITBIZZ.name,
-    alternateName: `${FITBIZZ.name} by ${SITE_NAME}`,
+    alternateName: FITBIZZ.brandName,
+    brand: { '@id': `${SITE_URL}${FITBIZZ.path}#brand` },
     description: FITBIZZ.description,
     url: `${SITE_URL}${FITBIZZ.path}`,
     applicationCategory: 'BusinessApplication',

@@ -1,5 +1,6 @@
 import {
   CONTACT,
+  FITBIZZ,
   FOUNDER,
   FOUNDER_PROFILES,
   ORG_PROFILES,
@@ -47,6 +48,9 @@ export function StructuredData() {
       // below rather than repeating the name inline.
       founder: { '@id': FOUNDER.id },
       employee: { '@id': FOUNDER.id },
+      // The second product line, so 'FitBizz by Qresta' resolves to this
+      // company rather than to an unrelated brand.
+      brand: [{ '@id': `${SITE_URL}${FITBIZZ.path}#brand` }],
       contactPoint: [
         {
           '@type': 'ContactPoint',
@@ -80,10 +84,20 @@ export function StructuredData() {
       ...(FOUNDER_PROFILES.length ? { sameAs: FOUNDER_PROFILES } : {}),
     },
     {
+      '@type': 'Brand',
+      '@id': `${SITE_URL}${FITBIZZ.path}#brand`,
+      name: FITBIZZ.name,
+      alternateName: FITBIZZ.brandName,
+      description: FITBIZZ.description,
+      url: `${SITE_URL}${FITBIZZ.path}`,
+      logo: `${SITE_URL}${FITBIZZ.path}/opengraph-image`,
+    },
+    {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
       name: SITE_NAME,
+      alternateName: [FITBIZZ.brandName],
       description: SITE_DESCRIPTION,
       inLanguage: 'en-IN',
       publisher: { '@id': `${SITE_URL}/#organization` },
