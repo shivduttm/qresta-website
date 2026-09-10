@@ -51,6 +51,7 @@ export const FOUNDER_PROFILES: string[] = [];
 export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }> = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/fitbizz', priority: 0.9, changeFrequency: 'weekly' },
+  { path: '/fitbizz/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/founder', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },

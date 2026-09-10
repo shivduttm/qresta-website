@@ -9,8 +9,11 @@ import { FITBIZZ } from '@/lib/site';
    Content
    =====================================================================
 
-   Same shape as the restaurant page (home-content.tsx): everything a
-   marketer would edit is data up here, the layout below stays layout.
+   Everything a marketer would edit is data up here; the layout below
+   stays layout. This page, with FitBizzHeader/FitBizzFooter from
+   components/fitbizz-chrome.tsx, is the whole gym site: nothing on it
+   links to a sign-in or sign-up — visitors come in through the demo
+   request and the contact page.
 
    Same rules, too. No prices, plans, trials or anything that reads as
    commercial terms — that conversation happens on the demo call. Every
@@ -106,7 +109,7 @@ export default function FitBizzPage() {
       <CapabilityStrip />
       <Modules />
       <Payments />
-      <OwnerView />
+      <OwnerView onDemo={onDemo} />
       <ProductFacts />
       <Customers />
       <ClosingCta onDemo={onDemo} />
@@ -157,22 +160,17 @@ function Hero({ onDemo }: { onDemo: () => void }) {
           >
             Book a demo
           </button>
-          {/* Proxied app route — a plain anchor on purpose (see next.config.ts). */}
-          <a
-            href={FITBIZZ.registerPath}
+          <Link
+            href="/fitbizz#modules"
             className="rounded-xl px-6 py-3.5 text-sm font-bold inline-flex items-center gap-2 transition-colors hover:bg-white/5"
             style={{ border: '1px solid var(--line-strong)', background: 'var(--card)' }}
           >
-            Create your gym’s account
-            <span aria-hidden="true">→</span>
-          </a>
+            See what it does
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+              <path d="M2 1l5 4-5 4z" fill="currentColor" />
+            </svg>
+          </Link>
         </div>
-        <p className="mt-4 text-xs" style={{ color: 'var(--ink-faint)' }}>
-          Already on FitBizz?{' '}
-          <a href={FITBIZZ.loginPath} className="font-semibold hover:underline" style={{ color: 'var(--ink-soft)' }}>
-            Sign in
-          </a>
-        </p>
       </div>
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6 pb-4">
@@ -549,7 +547,7 @@ function Payments() {
             ))}
           </div>
           <Link
-            href="/contact"
+            href="/fitbizz/contact"
             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition-colors hover:bg-white/5"
             style={{ border: '1px solid var(--line-strong)', background: 'var(--card)' }}
           >
@@ -572,7 +570,7 @@ function Check() {
   );
 }
 
-function OwnerView() {
+function OwnerView({ onDemo }: { onDemo: () => void }) {
   return (
     <section id="owner" className="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20 scroll-mt-20">
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -591,14 +589,14 @@ function OwnerView() {
               </div>
             ))}
           </div>
-          <Link
-            href="/demo"
+          <button
+            onClick={onDemo}
             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition-colors hover:bg-white/5"
             style={{ border: '1px solid var(--line-strong)', background: 'var(--card)' }}
           >
             See the owner dashboard live
             <span aria-hidden="true">→</span>
-          </Link>
+          </button>
         </div>
 
         <div className="flex justify-center lg:justify-end gap-3 sm:gap-4">
@@ -767,19 +765,19 @@ function ClosingCta({ onDemo }: { onDemo: () => void }) {
           </h2>
           <p className="mx-auto mb-9 text-base" style={{ color: 'rgba(255,255,255,0.86)', maxWidth: 560 }}>
             Book a 20-minute demo and we will set up your plans, a kiosk and a first invoice
-            while you watch — or create your gym’s account and start adding members today.
+            while you watch, on your own gym’s details.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button onClick={onDemo} className="rounded-xl px-6 py-3.5 text-sm font-bold" style={{ background: '#fff', color: 'var(--blue-700)' }}>
               Book a demo
             </button>
-            <a
-              href={FITBIZZ.registerPath}
+            <Link
+              href="/fitbizz/contact"
               className="rounded-xl px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
               style={{ border: '1px solid rgba(255,255,255,0.55)' }}
             >
-              Create your gym’s account
-            </a>
+              Contact us
+            </Link>
           </div>
         </div>
       </div>
