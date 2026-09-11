@@ -37,17 +37,16 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   alternates: { canonical: '/' },
   keywords: [
+    'Qresta',
+    'restaurant management software India',
     'restaurant POS India',
-    'restaurant billing software',
-    'QR menu ordering',
-    'kitchen display system',
-    'Zomato Swiggy order management',
-    'restaurant inventory software',
-    'GST billing for restaurants',
-    'gym management software India',
-    'FitBizz gym software',
     'cloud kitchen software India',
     'CloudKitchen by Qresta',
+    'gym management software India',
+    'FitBizz by Qresta',
+    'GST billing software India',
+    'kitchen display system',
+    'QR menu ordering',
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -106,8 +105,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StructuredData />
         <LeadModalsProvider>
           {/* Header and footer depend on which site the path belongs to:
-              the restaurant site at the root, FitBizz under /fitbizz, or
-              CloudKitchen under /cloudkitchen. */}
+              the company at the root, and one product site under each of
+              /restaurant, /cloudkitchen and /fitbizz. */}
           <SiteChrome>{children}</SiteChrome>
         </LeadModalsProvider>
       </body>

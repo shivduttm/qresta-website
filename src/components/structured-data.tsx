@@ -1,6 +1,6 @@
 import {
   CONTACT,
-  FITBIZZ,
+  PRODUCTS,
   FOUNDER,
   FOUNDER_PROFILES,
   ORG_PROFILES,
@@ -48,9 +48,10 @@ export function StructuredData() {
       // below rather than repeating the name inline.
       founder: { '@id': FOUNDER.id },
       employee: { '@id': FOUNDER.id },
-      // The second product line, so 'FitBizz by Qresta' resolves to this
-      // company rather than to an unrelated brand.
-      brand: [{ '@id': `${SITE_URL}${FITBIZZ.path}#brand` }],
+      // Every product line, so 'FitBizz by Qresta' or 'CloudKitchen by
+      // Qresta' resolves to this company rather than to an unrelated
+      // brand of the same name.
+      brand: PRODUCTS.map((p) => ({ '@id': `${SITE_URL}${p.path}#brand` })),
       contactPoint: [
         {
           '@type': 'ContactPoint',
@@ -83,21 +84,21 @@ export function StructuredData() {
       nationality: { '@type': 'Country', name: 'India' },
       ...(FOUNDER_PROFILES.length ? { sameAs: FOUNDER_PROFILES } : {}),
     },
-    {
+    ...PRODUCTS.map((p) => ({
       '@type': 'Brand',
-      '@id': `${SITE_URL}${FITBIZZ.path}#brand`,
-      name: FITBIZZ.name,
-      alternateName: FITBIZZ.brandName,
-      description: FITBIZZ.description,
-      url: `${SITE_URL}${FITBIZZ.path}`,
-      logo: `${SITE_URL}${FITBIZZ.path}/opengraph-image`,
-    },
+      '@id': `${SITE_URL}${p.path}#brand`,
+      name: p.name,
+      alternateName: p.brandName,
+      description: p.blurb,
+      url: `${SITE_URL}${p.path}`,
+      logo: `${SITE_URL}${p.path}/opengraph-image`,
+    })),
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
       name: SITE_NAME,
-      alternateName: [FITBIZZ.brandName],
+      alternateName: PRODUCTS.map((p) => p.brandName),
       description: SITE_DESCRIPTION,
       inLanguage: 'en-IN',
       publisher: { '@id': `${SITE_URL}/#organization` },

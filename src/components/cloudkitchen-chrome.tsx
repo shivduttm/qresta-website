@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { CloudKitchenMark, CloudKitchenWordmark } from './brand';
+import { ProductLinks } from './product-links';
 import { useLeadModals } from './lead-modals';
 import { CLOUDKITCHEN, CONTACT } from '@/lib/site';
 
@@ -117,7 +118,7 @@ export function CloudKitchenHeader() {
 export function CloudKitchenFooter() {
   return (
     <footer style={{ borderTop: '1px solid var(--line)' }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <Link href={CLOUDKITCHEN.path} className="flex items-center gap-2.5 mb-3">
             <CloudKitchenMark size={30} />
@@ -141,6 +142,8 @@ export function CloudKitchenFooter() {
           </div>
         </div>
 
+        <ProductLinks current="cloudkitchen" />
+
         <div>
           <div className="font-mono text-[11px] uppercase tracking-[0.18em] mb-3" style={{ color: 'var(--ink-faint)' }}>
             Talk to us
@@ -152,8 +155,8 @@ export function CloudKitchenFooter() {
             <a href={`tel:${CONTACT.phone}`} className="transition-colors hover:text-white">
               {CONTACT.phoneDisplay}
             </a>
-            <Link href="/" className="transition-colors hover:text-white">
-              Qresta for restaurants
+            <Link href="/about" className="transition-colors hover:text-white">
+              About Qresta
             </Link>
           </div>
         </div>

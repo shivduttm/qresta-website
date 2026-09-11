@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FitBizzMark, FitBizzWordmark } from './brand';
+import { ProductLinks } from './product-links';
 import { useLeadModals } from './lead-modals';
 import { CONTACT, FITBIZZ } from '@/lib/site';
 
@@ -131,6 +132,7 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href:
     title: 'Company',
     links: [
       { label: 'Contact', href: '/fitbizz/contact' },
+      { label: 'About Qresta', href: '/about' },
       { label: 'Privacy', href: '/privacy-policy' },
       { label: 'Terms', href: '/terms' },
     ],
@@ -171,7 +173,8 @@ export function FitBizzFooter() {
             </button>
           </div>
 
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+            <ProductLinks current="fitbizz" />
             {FOOTER_COLUMNS.map((col) => (
               <div key={col.title}>
                 <div

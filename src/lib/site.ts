@@ -10,10 +10,10 @@ export const SITE_URL = 'https://qresta.in';
 
 export const SITE_NAME = 'Qresta';
 
-export const SITE_TAGLINE = 'The restaurant operating system for India';
+export const SITE_TAGLINE = 'Operating software for restaurants, cloud kitchens and gyms';
 
 export const SITE_DESCRIPTION =
-  'Qresta runs billing, kitchen display, QR ordering, Zomato and Swiggy orders, inventory and reports on one platform — offline-first, GST-ready, built for Indian restaurants.';
+  'Qresta builds the software Indian food and fitness businesses run on: Restaurant Management for dine-in and takeaway, CloudKitchen for delivery-only kitchens, and FitBizz for gyms and studios — each offline-aware, GST-ready and built for how these floors actually work.';
 
 export const CONTACT = {
   email: 'info@qresta.in',
@@ -50,6 +50,7 @@ export const FOUNDER_PROFILES: string[] = [];
 /** Every indexable page, in the order they matter. Feeds the sitemap. */
 export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }> = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
+  { path: '/restaurant', priority: 0.95, changeFrequency: 'weekly' },
   { path: '/fitbizz', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/fitbizz/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/cloudkitchen', priority: 0.9, changeFrequency: 'weekly' },
@@ -96,6 +97,23 @@ export const DISALLOWED_PATHS = [
 ];
 
 /**
+ * The first product. Sold from qresta.in/restaurant; the app itself is
+ * reached at the domain root (/login, /dashboard, /stall/…) through the
+ * proxy in next.config.ts — those paths predate this page and stay put,
+ * because printed QR codes and saved logins point at them.
+ */
+export const RESTAURANT = {
+  name: 'Qresta Restaurant',
+  /** The phrase the product is searched for and listed under. */
+  brandName: 'Qresta Restaurant Management',
+  tagline: 'Restaurant management software by Qresta',
+  description:
+    'Qresta Restaurant Management runs counter billing, kitchen display, QR scan-and-order, Zomato and Swiggy orders, inventory with recipe-level deduction, and head-office reports on one offline-first, GST-ready platform.',
+  path: '/restaurant',
+  loginPath: '/login',
+} as const;
+
+/**
  * The second product. Sold from qresta.in/fitbizz; the app itself is a
  * separate service reached through the same proxy (see next.config.ts).
  */
@@ -126,3 +144,49 @@ export const CLOUDKITCHEN = {
   loginPath: '/cloudkitchen/login',
   registerPath: '/cloudkitchen/register',
 } as const;
+
+/**
+ * The three products, in the order the company leads with them. This is
+ * the one list the home page, every footer and the products nav read
+ * from, so a fourth product is a single edit here.
+ *
+ * `label` is what a visitor sees in navigation — the category, because
+ * that is what they are looking for. `name` is the brand.
+ */
+export const PRODUCTS = [
+  {
+    key: 'restaurant',
+    label: 'Restaurant Management',
+    name: RESTAURANT.name,
+    brandName: RESTAURANT.brandName,
+    path: RESTAURANT.path,
+    for: 'Dine-in, cafés, QSR, bars and food courts',
+    blurb:
+      'Billing that keeps working when the internet does not, a kitchen display that routes by station, QR ordering at the table, and Zomato and Swiggy in the same queue as everything else.',
+    points: ['Offline-first POS and GST invoices', 'KOT, kitchen display and QR ordering', 'Online orders, inventory and head office'],
+  },
+  {
+    key: 'cloudkitchen',
+    label: 'Cloud Kitchen',
+    name: CLOUDKITCHEN.name,
+    brandName: CLOUDKITCHEN.brandName,
+    path: CLOUDKITCHEN.path,
+    for: 'Delivery-only kitchens running one or many brands',
+    blurb:
+      'Every channel in one queue, a kitchen display that keeps time by station, and a recipe behind each dish so you know what the plate actually earns.',
+    points: ['Swiggy, Zomato, ONDC and your own orders', 'Kitchen display with live prep timers', 'Recipe costing, inventory and dispatch'],
+  },
+  {
+    key: 'fitbizz',
+    label: 'Gym Automation',
+    name: FITBIZZ.name,
+    brandName: FITBIZZ.brandName,
+    path: FITBIZZ.path,
+    for: 'Gyms, fitness studios and personal training',
+    blurb:
+      'Memberships, QR and biometric check-in, trainers and PT packages, GST invoices and a supplements counter — with members paying into the gym’s own account.',
+    points: ['Memberships, renewals and check-in', 'Trainers, PT packages and progress', 'GST billing into your own gateway'],
+  },
+] as const;
+
+export type ProductKey = (typeof PRODUCTS)[number]['key'];

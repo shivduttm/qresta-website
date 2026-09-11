@@ -59,7 +59,7 @@ export default function DemoRequestPage() {
     <div className="max-w-md mx-auto px-6 py-16">
       <h1 className="font-display text-3xl font-bold mb-2">Request a demo</h1>
       <p className="text-sm mb-8" style={{ color: 'var(--ink-soft)' }}>
-        Tell us a bit about your restaurant and we'll show you Qresta running with your own setup.
+        Tell us what you run — a restaurant, a cloud kitchen or a gym — and we&apos;ll show you the right product running on your own setup.
       </p>
 
       <form
@@ -110,7 +110,7 @@ export default function DemoRequestPage() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-xs font-semibold mb-1.5">Restaurant name (optional)</label>
+          <label className="block text-xs font-semibold mb-1.5">Business name (optional)</label>
           <input
             value={restaurantName}
             onChange={(e) => setRestaurantName(e.target.value)}

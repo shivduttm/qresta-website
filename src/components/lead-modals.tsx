@@ -4,10 +4,10 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import { submitDemoRequest, ApiError } from '@/lib/api';
 
 /** Which product the lead is about — changes the form's wording and tags the request. */
-export type LeadProduct = 'qresta' | 'fitbizz' | 'cloudkitchen';
+export type LeadProduct = 'qresta' | 'restaurant' | 'fitbizz' | 'cloudkitchen';
 
 interface LeadModalsContextValue {
-  /** Pass 'fitbizz' for gym leads or 'cloudkitchen' for cloud-kitchen leads; anything else (including a click event) means Qresta. */
+  /** Pass the product the visitor is looking at — 'restaurant', 'cloudkitchen' or 'fitbizz'. Anything else (including a click event, which is how most callers pass it) means the company page, where we do not know yet. */
   openDemoModal: (product?: LeadProduct | unknown) => void;
   openAppointmentModal: () => void;
 }
@@ -30,7 +30,7 @@ export function LeadModalsProvider({ children }: { children: ReactNode }) {
       value={{
         // Callers often pass this straight to onClick, so the argument
         // may be a MouseEvent — only a literal product name switches product.
-        openDemoModal: (product) => setOpen({ kind: 'demo', product: product === 'fitbizz' || product === 'cloudkitchen' ? product : 'qresta' }),
+        openDemoModal: (product) => setOpen({ kind: 'demo', product: product === 'fitbizz' || product === 'cloudkitchen' || product === 'restaurant' ? product : 'qresta' }),
         openAppointmentModal: () => setOpen({ kind: 'appointment', product: 'qresta' }),
       }}
     >
@@ -44,9 +44,10 @@ function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadP
   const isAppointment = kind === 'appointment';
   const isGym = product === 'fitbizz';
   const isKitchen = product === 'cloudkitchen';
+  const isRestaurant = product === 'restaurant';
   // The lead queue on the dashboard is shared, so a gym request says so
   // in its first line — the API has no product field of its own.
-  const productTag = isGym ? '[FitBizz] ' : isKitchen ? '[CloudKitchen] ' : '';
+  const productTag = isGym ? '[FitBizz] ' : isKitchen ? '[CloudKitchen] ' : isRestaurant ? '[Restaurant] ' : '';
 
   const [restaurantName, setRestaurantName] = useState('');
   const [ownerName, setOwnerName] = useState('');
@@ -111,7 +112,7 @@ function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadP
         <div className="flex items-start justify-between mb-1">
           <div>
             <h2 className="font-display text-xl font-semibold">
-              {isAppointment ? 'Book an appointment' : isGym ? 'See FitBizz on your gym' : isKitchen ? 'See CloudKitchen on your kitchen' : 'Book your free demo'}
+              {isAppointment ? 'Book an appointment' : isGym ? 'See FitBizz on your gym' : isKitchen ? 'See CloudKitchen on your kitchen' : isRestaurant ? 'See Qresta on your menu' : 'Book your free demo'}
             </h2>
             <p className="text-sm mt-1" style={{ color: 'var(--ink-soft)' }}>
               {isAppointment
@@ -120,7 +121,9 @@ function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadP
                   ? "Takes 20 minutes. We'll walk through memberships, check-in and billing set up for a gym like yours."
                   : isKitchen
                     ? "Takes 20 minutes. We'll walk through aggregator orders, the kitchen display and food cost on a menu like yours."
-                    : "Takes 20 minutes. We'll show you Qresta running on a real menu."}
+                    : isRestaurant
+                      ? "Takes 20 minutes. We'll show you Qresta running on a real menu."
+                      : "Takes 20 minutes. Tell us what you run and we'll set it up on your own menu, dishes or membership plans."}
             </p>
           </div>
           <button onClick={onClose} className="text-sm font-semibold" style={{ color: 'var(--ink-soft)' }}>
@@ -166,7 +169,7 @@ function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadP
               <input
                 value={restaurantName}
                 onChange={(e) => setRestaurantName(e.target.value)}
-                placeholder={isGym ? 'Gym / studio name' : isKitchen ? 'Kitchen / brand name' : 'Restaurant Name'}
+                placeholder={isGym ? 'Gym / studio name' : isKitchen ? 'Kitchen / brand name' : isRestaurant ? 'Restaurant name' : 'Business name'}
                 required
                 className="rounded-lg px-3 py-2.5 text-sm outline-none"
                 style={{ border: '1.5px solid var(--line)' }}
@@ -237,7 +240,7 @@ function LeadModal({ kind, product, onClose }: { kind: ModalKind; product: LeadP
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder={isAppointment ? 'Notes (optional)' : isGym ? 'Tell us about your gym — members, branches, what you use today (optional)' : isKitchen ? 'Tell us about your kitchen — brands, channels, orders a day (optional)' : 'Tell us about your restaurant (optional)'}
+              placeholder={isAppointment ? 'Notes (optional)' : isGym ? 'Tell us about your gym — members, branches, what you use today (optional)' : isKitchen ? 'Tell us about your kitchen — brands, channels, orders a day (optional)' : isRestaurant ? 'Tell us about your restaurant (optional)' : 'What do you run — a restaurant, a cloud kitchen or a gym? (optional)'}
               rows={3}
               className="w-full rounded-lg px-3 py-2.5 text-sm outline-none mb-4"
               style={{ border: '1.5px solid var(--line)' }}

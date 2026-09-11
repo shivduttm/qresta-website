@@ -8,24 +8,24 @@ import { useLeadModals } from './lead-modals';
 type MenuItem = { label: string; desc: string; href: string };
 
 const PRODUCT_MENU: MenuItem[] = [
-  { label: 'POS billing', desc: 'Offline-first counter billing and GST invoices', href: '/#modules' },
-  { label: 'KOT & Kitchen Display', desc: 'Station routing, timers and item-wise firing', href: '/#modules' },
-  { label: 'QR scan & order', desc: 'Guests order from the table, no app to install', href: '/#modules' },
-  { label: 'Online orders hub', desc: 'Zomato, Swiggy and your own site in one queue', href: '/#online-orders' },
-  { label: 'Inventory & recipes', desc: 'Recipe-level deduction and variance reports', href: '/#modules' },
-  { label: 'Reports & head office', desc: 'Every outlet on one screen, approvals in a tap', href: '/#owner' },
+  { label: 'POS billing', desc: 'Offline-first counter billing and GST invoices', href: '/restaurant#modules' },
+  { label: 'KOT & Kitchen Display', desc: 'Station routing, timers and item-wise firing', href: '/restaurant#modules' },
+  { label: 'QR scan & order', desc: 'Guests order from the table, no app to install', href: '/restaurant#modules' },
+  { label: 'Online orders hub', desc: 'Zomato, Swiggy and your own site in one queue', href: '/restaurant#online-orders' },
+  { label: 'Inventory & recipes', desc: 'Recipe-level deduction and variance reports', href: '/restaurant#modules' },
+  { label: 'Reports & head office', desc: 'Every outlet on one screen, approvals in a tap', href: '/restaurant#owner' },
 ];
 
 const SOLUTIONS_MENU: MenuItem[] = [
-  { label: 'Restaurants', desc: 'Dine-in service, floors and multi-station kitchens', href: '/#customers' },
-  { label: 'Cafés & QSR', desc: 'Fast counters, takeaway queues and repeat guests', href: '/#customers' },
-  { label: 'Cloud kitchens', desc: 'Aggregator-first, no dining floor to run', href: '/#customers' },
-  { label: 'Food courts', desc: 'Many counters, one reconciled set of books', href: '/#customers' },
-  { label: 'Hotels', desc: 'Restaurant plus in-room dining on one platform', href: '/#customers' },
-  { label: 'Bars & lounges', desc: 'Tabs, split bills and stock-tight pouring', href: '/#customers' },
+  { label: 'Restaurants', desc: 'Dine-in service, floors and multi-station kitchens', href: '/restaurant#customers' },
+  { label: 'Cafés & QSR', desc: 'Fast counters, takeaway queues and repeat guests', href: '/restaurant#customers' },
+  { label: 'Cloud kitchens', desc: 'Aggregator-first, no dining floor to run', href: '/restaurant#customers' },
+  { label: 'Food courts', desc: 'Many counters, one reconciled set of books', href: '/restaurant#customers' },
+  { label: 'Hotels', desc: 'Restaurant plus in-room dining on one platform', href: '/restaurant#customers' },
+  { label: 'Bars & lounges', desc: 'Tabs, split bills and stock-tight pouring', href: '/restaurant#customers' },
 ];
 
-export function SiteHeader() {
+export function RestaurantHeader() {
   const { openDemoModal } = useLeadModals();
   const [open, setOpen] = useState<'product' | 'solutions' | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -70,9 +70,14 @@ export function SiteHeader() {
       }}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
+        <Link href="/restaurant" className="flex items-center gap-2.5 flex-shrink-0">
           <QrestaMark size={32} />
-          <span className="font-display text-lg font-bold tracking-tight">Qresta</span>
+          <span className="font-display text-lg font-bold tracking-tight">
+            Qresta
+            <span className="font-body text-[11px] font-semibold ml-2" style={{ color: 'var(--ink-faint)' }}>
+              Restaurant
+            </span>
+          </span>
         </Link>
 
         <div ref={navRef} className="hidden lg:flex items-center gap-1 relative">
@@ -86,7 +91,7 @@ export function SiteHeader() {
             isOpen={open === 'solutions'}
             onToggle={() => setOpen(open === 'solutions' ? null : 'solutions')}
           />
-          <NavLink href="/#customers">Customers</NavLink>
+          <NavLink href="/restaurant#customers">Customers</NavLink>
           <NavLink href="/fitbizz">
             <span className="inline-flex items-center gap-1.5">
               FitBizz
@@ -139,7 +144,7 @@ export function SiteHeader() {
             advertised to visitors. */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
-            onClick={openDemoModal}
+            onClick={() => openDemoModal('restaurant')}
             className="rounded-xl px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             style={{ background: 'var(--blue-600)' }}
           >
@@ -174,7 +179,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/#customers" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
+            <Link href="/restaurant#customers" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               Customers
             </Link>
             <Link href="/fitbizz" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">

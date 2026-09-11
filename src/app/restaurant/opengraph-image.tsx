@@ -1,10 +1,9 @@
 import { ImageResponse } from 'next/og';
-import { SITE_NAME, SITE_TAGLINE } from '@/lib/site';
+import { RESTAURANT, SITE_NAME } from '@/lib/site';
 
-// The card Google, WhatsApp, LinkedIn and X show when qresta.in is
-// shared or previewed. Generated rather than shipped as a PNG so it
-// never drifts from the site's own colours.
-export const alt = `${SITE_NAME} — ${SITE_TAGLINE}`;
+// The share card for qresta.in/restaurant. Same construction as the
+// root card, carrying the product name rather than the company line.
+export const alt = `${RESTAURANT.brandName} — restaurant POS and billing software`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -64,8 +63,9 @@ export default function Image() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`data:image/svg+xml;utf8,${encodeURIComponent(MARK)}`} width={54} height={54} alt="" />
           </div>
-          <div style={{ marginLeft: 22, fontSize: 46, fontWeight: 700, color: '#EDF1FB', letterSpacing: -1 }}>
+          <div style={{ display: 'flex', marginLeft: 22, fontSize: 46, fontWeight: 700, color: '#EDF1FB', letterSpacing: -1 }}>
             {SITE_NAME}
+            <span style={{ color: '#9DABCD', fontWeight: 500, marginLeft: 16 }}>Restaurant</span>
           </div>
         </div>
 
@@ -80,14 +80,14 @@ export default function Image() {
             maxWidth: 940,
           }}
         >
-          The software Indian restaurants, kitchens and gyms run on.
+          Restaurant management built for India&apos;s rush hour.
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', fontSize: 27, color: '#9DABCD' }}>
-            Restaurant Management · Cloud Kitchen · Gym Automation
+            Billing · Kitchen · QR ordering · Online orders · Inventory · Reports
           </div>
-          <div style={{ display: 'flex', fontSize: 27, color: '#3B76FF', fontWeight: 600 }}>qresta.in</div>
+          <div style={{ display: 'flex', fontSize: 27, color: '#3B76FF', fontWeight: 600 }}>qresta.in/restaurant</div>
         </div>
       </div>
     ),
