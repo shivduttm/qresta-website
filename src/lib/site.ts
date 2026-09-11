@@ -52,6 +52,8 @@ export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'w
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/fitbizz', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/fitbizz/contact', priority: 0.6, changeFrequency: 'monthly' },
+  { path: '/cloudkitchen', priority: 0.9, changeFrequency: 'weekly' },
+  { path: '/cloudkitchen/contact', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/founder', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
@@ -84,6 +86,13 @@ export const DISALLOWED_PATHS = [
   '/fitbizz/kiosk',
   '/fitbizz/pay/',
   '/fitbizz/_next/',
+  // CloudKitchen's app routes, same arrangement. /cloudkitchen itself is
+  // the product page this site renders and stays indexable.
+  '/cloudkitchen/login',
+  '/cloudkitchen/register',
+  '/cloudkitchen/forgot-password',
+  '/cloudkitchen/dashboard',
+  '/cloudkitchen/_next/',
 ];
 
 /**
@@ -100,4 +109,20 @@ export const FITBIZZ = {
   path: '/fitbizz',
   loginPath: '/fitbizz/login',
   registerPath: '/fitbizz/register',
+} as const;
+
+/**
+ * The third product. Sold from qresta.in/cloudkitchen; the app itself is
+ * a separate service reached through the same proxy (see next.config.ts).
+ */
+export const CLOUDKITCHEN = {
+  name: 'CloudKitchen',
+  /** The phrase the product is searched for and listed under. */
+  brandName: 'CloudKitchen by Qresta',
+  tagline: 'Cloud kitchen management software by Qresta',
+  description:
+    'CloudKitchen pulls Swiggy, Zomato and your own orders into one queue, runs a live kitchen display, costs every dish against live stock, and settles delivery, GST billing and reports for delivery-only kitchens running several brands from one address.',
+  path: '/cloudkitchen',
+  loginPath: '/cloudkitchen/login',
+  registerPath: '/cloudkitchen/register',
 } as const;

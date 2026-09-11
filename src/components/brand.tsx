@@ -126,3 +126,28 @@ export function FitBizzWordmark({ size = 20 }: { size?: number }) {
     </span>
   );
 }
+
+/**
+ * The CloudKitchen mark — a blue tile holding a cloche with a cloud lid,
+ * inlined here so the marketing site never depends on an asset served by
+ * the other app.
+ */
+export function CloudKitchenMark({ size = 40, title = 'CloudKitchen', tile = true }: { size?: number; title?: string; tile?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" role="img" aria-label={title} style={{ flexShrink: 0 }}>
+      {tile && <rect width="48" height="48" rx="12" fill="#1E5EFF" />}
+      <path d="M17.5 20.5a5 5 0 0 1 9.2-2.2 4 4 0 0 1 5.6 3.1 3.4 3.4 0 0 1-.7 6.6H18a4 4 0 0 1-.5-7.5Z" fill="#fff" opacity="0.92" />
+      <path d="M11 33.5c0-5.9 5.8-10.5 13-10.5s13 4.6 13 10.5" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" opacity="0.75" />
+      <rect x="9" y="33" width="30" height="3.6" rx="1.8" fill="#fff" />
+    </svg>
+  );
+}
+
+/** "CloudKitchen" set the way the product sets it: Cloud in white, Kitchen in light blue. */
+export function CloudKitchenWordmark({ size = 20 }: { size?: number }) {
+  return (
+    <span className="font-display font-extrabold leading-none" style={{ fontSize: size, letterSpacing: '-0.5px' }}>
+      Cloud<span style={{ color: '#8FB0FF' }}>Kitchen</span>
+    </span>
+  );
+}

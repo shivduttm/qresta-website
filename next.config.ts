@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     // one prefix — qresta.in/fitbizz/login, /fitbizz/dashboard, and its
     // /fitbizz/_next/* chunks — and a single rule forwards all of it.
     const FITBIZZ_ORIGIN = 'http://fitbizz-web.railway.internal:8080';
+    // CloudKitchen is arranged the same way, under basePath '/cloudkitchen'.
+    const CLOUDKITCHEN_ORIGIN = 'http://cloudkitchen-web.railway.internal:8080';
     return [
       { source: '/login', destination: `${APP_ORIGIN}/login` },
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
@@ -36,6 +38,9 @@ const nextConfig: NextConfig = {
       // marketing page, rendered by this site (src/app/fitbizz). The app's
       // own root merely redirected to /fitbizz/login anyway.
       { source: '/fitbizz/:path*', destination: `${FITBIZZ_ORIGIN}/fitbizz/:path*` },
+      // Same split for CloudKitchen: bare /cloudkitchen is this site's
+      // product page, everything under it belongs to the app.
+      { source: '/cloudkitchen/:path*', destination: `${CLOUDKITCHEN_ORIGIN}/cloudkitchen/:path*` },
     ];
   },
 };

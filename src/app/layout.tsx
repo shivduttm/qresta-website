@@ -46,6 +46,8 @@ export const metadata: Metadata = {
     'GST billing for restaurants',
     'gym management software India',
     'FitBizz gym software',
+    'cloud kitchen software India',
+    'CloudKitchen by Qresta',
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -104,7 +106,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StructuredData />
         <LeadModalsProvider>
           {/* Header and footer depend on which site the path belongs to:
-              the restaurant site at the root, or FitBizz under /fitbizz. */}
+              the restaurant site at the root, FitBizz under /fitbizz, or
+              CloudKitchen under /cloudkitchen. */}
           <SiteChrome>{children}</SiteChrome>
         </LeadModalsProvider>
       </body>

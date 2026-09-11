@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLeadModals } from '@/components/lead-modals';
-import { FitBizzMark, FitBizzWordmark } from '@/components/brand';
+import { CloudKitchenMark, CloudKitchenWordmark, FitBizzMark, FitBizzWordmark } from '@/components/brand';
 import { QrestaMark } from '@/components/brand';
 
 /* =====================================================================
@@ -120,6 +120,13 @@ const FITBIZZ_POINTS = [
   'Members pay into the gym’s own payment gateway',
 ];
 
+/** The third product, teased the same way and sold on /cloudkitchen. */
+const CLOUDKITCHEN_POINTS = [
+  'Swiggy, Zomato, ONDC and your own orders in one queue',
+  'A kitchen display that keeps time by station',
+  'Recipes that cost every dish against live stock',
+];
+
 /* ===================================================================== */
 
 export default function HomePage() {
@@ -136,7 +143,7 @@ export default function HomePage() {
       <ProductFacts />
       <Customers />
       {TESTIMONIALS.length > 0 && <Testimonials />}
-      <FitBizzTeaser />
+      <OtherProducts />
       <ClosingCta onDemo={openDemoModal} />
     </div>
   );
@@ -998,11 +1005,12 @@ function Testimonials() {
   );
 }
 
-/** One card for the other product, so a gym owner who lands here finds
- *  their way — without turning the restaurant page into a catalogue. */
-function FitBizzTeaser() {
+/** One card each for the other two products, so a gym owner or a cloud
+ *  kitchen who lands here finds their way — without turning the
+ *  restaurant page into a catalogue. */
+function OtherProducts() {
   return (
-    <section className="max-w-6xl mx-auto px-5 sm:px-6 pb-16 sm:pb-20">
+    <section className="max-w-6xl mx-auto px-5 sm:px-6 pb-16 sm:pb-20 grid gap-5">
       <Link
         href="/fitbizz"
         className="group grid lg:grid-cols-12 gap-6 lg:gap-10 items-center rounded-3xl p-6 sm:p-8 card-lit transition-colors hover:bg-white/[0.03]"
@@ -1032,6 +1040,45 @@ function FitBizzTeaser() {
         </div>
         <div className="lg:col-span-5 grid gap-2.5">
           {FITBIZZ_POINTS.map((p) => (
+            <div key={p} className="flex items-start gap-3 rounded-xl px-4 py-3" style={{ background: 'var(--paper-alt)', border: '1px solid var(--line)' }}>
+              <Check />
+              <span className="text-sm" style={{ color: 'var(--ink-soft)' }}>
+                {p}
+              </span>
+            </div>
+          ))}
+        </div>
+      </Link>
+
+      <Link
+        href="/cloudkitchen"
+        className="group grid lg:grid-cols-12 gap-6 lg:gap-10 items-center rounded-3xl p-6 sm:p-8 card-lit transition-colors hover:bg-white/[0.03]"
+      >
+        <div className="lg:col-span-7">
+          <div className="flex items-center gap-2 mb-4">
+            <CloudKitchenMark size={30} />
+            <CloudKitchenWordmark size={18} />
+            <span
+              className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] rounded px-1.5 py-0.5 ml-1"
+              style={{ background: 'var(--blue-50)', color: 'var(--blue-500)' }}
+            >
+              Also from Qresta
+            </span>
+          </div>
+          <h2 className="font-display font-bold mb-3" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            Delivery only, no dining room? There is a version built for that.
+          </h2>
+          <p className="text-sm sm:text-base mb-5" style={{ color: 'var(--ink-soft)', maxWidth: 560 }}>
+            CloudKitchen is our cloud kitchen software: every channel in one queue, a kitchen
+            display that keeps time, and a real food cost behind every dish you send out.
+          </p>
+          <span className="inline-flex items-center gap-2 text-sm font-bold" style={{ color: 'var(--blue-500)' }}>
+            Explore CloudKitchen
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+          </span>
+        </div>
+        <div className="lg:col-span-5 grid gap-2.5">
+          {CLOUDKITCHEN_POINTS.map((p) => (
             <div key={p} className="flex items-start gap-3 rounded-xl px-4 py-3" style={{ background: 'var(--paper-alt)', border: '1px solid var(--line)' }}>
               <Check />
               <span className="text-sm" style={{ color: 'var(--ink-soft)' }}>
