@@ -38,6 +38,15 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href:
     ],
   },
   {
+    title: 'CloudKitchen',
+    links: [
+      { label: 'Cloud kitchen software', href: '/cloudkitchen' },
+      { label: 'Orders from every channel', href: '/cloudkitchen#channels' },
+      { label: 'Recipes & food cost', href: '/cloudkitchen#costing' },
+      { label: 'Contact CloudKitchen', href: '/cloudkitchen/contact' },
+    ],
+  },
+  {
     title: 'Company',
     links: [
       { label: 'About', href: '/about' },
@@ -49,7 +58,7 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<{ label: string; href:
   },
 ];
 
-/** The restaurant site's footer (everything outside /fitbizz). */
+/** The restaurant site's footer (everything outside /fitbizz and /cloudkitchen). */
 export function SiteFooter() {
   return (
     <footer style={{ borderTop: '1px solid var(--line)', background: 'var(--paper-alt)' }}>
@@ -62,8 +71,8 @@ export function SiteFooter() {
             </Link>
             <p className="text-sm mt-4 max-w-xs leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
               The restaurant operating system for India — billing, kitchen, QR ordering,
-              online orders, inventory and reports on one platform. And FitBizz, the same
-              care applied to gyms.
+              online orders, inventory and reports on one platform. And the same care
+              applied to gyms, in FitBizz, and to delivery-only kitchens, in CloudKitchen.
             </p>
             <div className="grid gap-1.5 text-sm mt-5" style={{ color: 'var(--ink-soft)' }}>
               <a href="mailto:info@qresta.in" className="hover:underline">

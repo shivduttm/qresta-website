@@ -98,6 +98,17 @@ export function SiteHeader() {
               </span>
             </span>
           </NavLink>
+          <NavLink href="/cloudkitchen">
+            <span className="inline-flex items-center gap-1.5">
+              CloudKitchen
+              <span
+                className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] rounded px-1 py-0.5"
+                style={{ background: 'var(--blue-50)', color: 'var(--blue-500)' }}
+              >
+                Kitchens
+              </span>
+            </span>
+          </NavLink>
           <NavLink href="/about">Company</NavLink>
 
           {open && (
@@ -168,6 +179,9 @@ export function SiteHeader() {
             </Link>
             <Link href="/fitbizz" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               FitBizz for gyms
+            </Link>
+            <Link href="/cloudkitchen" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
+              CloudKitchen for cloud kitchens
             </Link>
             <Link href="/about" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold hover:bg-white/5">
               Company
