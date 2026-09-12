@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
       { source: '/dashboard', destination: `${APP_ORIGIN}/dashboard` },
       { source: '/dashboard/:path*', destination: `${APP_ORIGIN}/dashboard/:path*` },
+      // The Admin Management Portal — QResta's own super admins and
+      // admin executives, with its own sign-in at
+      // /adminmanagementportal/login. Both rules for the same reason
+      // /dashboard needs two: :path* does not match the bare path.
+      { source: '/adminmanagementportal', destination: `${APP_ORIGIN}/adminmanagementportal` },
+      { source: '/adminmanagementportal/:path*', destination: `${APP_ORIGIN}/adminmanagementportal/:path*` },
       { source: '/menu/:path*', destination: `${APP_ORIGIN}/menu/:path*` },
       { source: '/order/:path*', destination: `${APP_ORIGIN}/order/:path*` },
       // Offline stall menus. Printed QR codes point at /stall/<slug>,

@@ -71,6 +71,7 @@ export const ROUTES: Array<{ path: string; priority: number; changeFrequency: 'w
  */
 export const DISALLOWED_PATHS = [
   '/dashboard',
+  '/adminmanagementportal',
   '/login',
   '/forgot-password',
   '/menu/',
