@@ -22,6 +22,8 @@ const nextConfig: NextConfig = {
     const FITBIZZ_ORIGIN = 'http://fitbizz-web.railway.internal:8080';
     // CloudKitchen is arranged the same way, under basePath '/cloudkitchen'.
     const CLOUDKITCHEN_ORIGIN = 'http://cloudkitchen-web.railway.internal:8080';
+    // Qresta Invoice (GST billing), another basePath service, at '/invoice'.
+    const INVOICE_ORIGIN = 'http://qresta-invoice.railway.internal:8080';
     return [
       { source: '/login', destination: `${APP_ORIGIN}/login` },
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
@@ -47,6 +49,12 @@ const nextConfig: NextConfig = {
       // Same split for CloudKitchen: bare /cloudkitchen is this site's
       // product page, everything under it belongs to the app.
       { source: '/cloudkitchen/:path*', destination: `${CLOUDKITCHEN_ORIGIN}/cloudkitchen/:path*` },
+      // Qresta Invoice has no marketing page here yet, so unlike FitBizz and
+      // CloudKitchen the bare path is forwarded too — it is the app's own
+      // root, which redirects to /invoice/login. Two rules because :path*
+      // does not match the bare path, the same reason /dashboard needs two.
+      { source: '/invoice', destination: `${INVOICE_ORIGIN}/invoice` },
+      { source: '/invoice/:path*', destination: `${INVOICE_ORIGIN}/invoice/:path*` },
     ];
   },
 };
