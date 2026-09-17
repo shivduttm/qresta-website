@@ -53,6 +53,16 @@ const nextConfig: NextConfig = {
       // CloudKitchen the bare path is forwarded too — it is the app's own
       // root, which redirects to /invoice/login. Two rules because :path*
       // does not match the bare path, the same reason /dashboard needs two.
+      // Rules are tried in order, so this refusal has to precede the
+      // /invoice forwarding below. Invoice serves its machine-only
+      // admin-management contract from the same Next.js service as its
+      // public pages, so this edge is the only place that can keep it off
+      // the open internet. qresta-api reaches those routes directly at
+      // qresta-invoice.railway.internal and never comes through here.
+      // /invoice/api/platform-sso stays forwarded on purpose — the SSO
+      // landing page is a browser and has to reach it.
+      { source: '/invoice/api/platform-admins', destination: '/api/not-public' },
+      { source: '/invoice/api/platform-admins/:path*', destination: '/api/not-public' },
       { source: '/invoice', destination: `${INVOICE_ORIGIN}/invoice` },
       { source: '/invoice/:path*', destination: `${INVOICE_ORIGIN}/invoice/:path*` },
     ];
