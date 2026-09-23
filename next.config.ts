@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
     return [
       { source: '/login', destination: `${APP_ORIGIN}/login` },
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
+      // Where "Start 14-day free trial" on the sign-in page leads. This list
+      // is an explicit allowlist with no catch-all, so without this rule the
+      // path resolves against the marketing site and 404s in production —
+      // while working perfectly on localhost, where there is no proxy.
+      { source: '/signup', destination: `${APP_ORIGIN}/signup` },
       { source: '/dashboard', destination: `${APP_ORIGIN}/dashboard` },
       { source: '/dashboard/:path*', destination: `${APP_ORIGIN}/dashboard/:path*` },
       // The Admin Management Portal — QResta's own super admins and
