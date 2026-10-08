@@ -85,7 +85,7 @@ const PRODUCT_FACTS = [
   { value: '22', label: 'Integrations in the catalogue', sub: 'Aggregators, gateways, riders, printers, books' },
   { value: '7', label: 'Order states, one flow', sub: 'New to completed, the same on every channel' },
   { value: '6', label: 'Staff roles with a permissions matrix', sub: 'Owner, manager, kitchen, packing, dispatch, staff' },
-  { value: '7', label: 'Reports, each exportable to CSV', sub: 'Sales, orders, dishes, customers, stock, profit, tax' },
+  { value: '7', label: 'Report tabs, any date range', sub: 'Sales, orders, dishes, customers, stock, profit, tax' },
 ];
 
 const CUSTOMER_TYPES = [

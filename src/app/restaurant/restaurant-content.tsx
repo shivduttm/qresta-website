@@ -68,7 +68,7 @@ const MODULES = [
   {
     icon: 'reports',
     title: 'Reports & head office',
-    body: 'Day-end close, 40+ reports, scheduled email summaries, and one group view across every outlet and central kitchen.',
+    body: 'Day-end close with an emailed Z-report, 18 reports with Excel export, and one Head Office view across every outlet and central kitchen.',
   },
 ] as const;
 

@@ -85,8 +85,9 @@ export default function CareersPage() {
             Build your career with Qresta
           </h1>
           <p className="text-lg" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Join our mission to transform restaurants across India through technology,
-            automation and thoughtful design.
+            Join our mission to help Indian businesses — restaurants, gyms, cloud kitchens,
+            billing counters and HR teams — run better through technology, automation and
+            thoughtful design.
           </p>
         </div>
       </section>
@@ -98,7 +99,7 @@ export default function CareersPage() {
             <div className="rounded-2xl p-7" style={{ background: 'var(--card)', border: '1px solid var(--line)' }}>
               <div className="font-display text-lg font-semibold mb-1">Why join Qresta?</div>
               <p className="text-sm mb-4" style={{ color: 'var(--ink-soft)' }}>
-                A growing team building for restaurants across India.
+                A growing team building five products for businesses across India.
               </p>
               <ul className="grid gap-2.5 text-sm">
                 {PERKS.map((p) => (

@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { useLeadModals } from '@/components/lead-modals';
-import { CloudKitchenMark, FitBizzMark, QrestaMark } from '@/components/brand';
+import { CloudKitchenMark, FitBizzMark, QrestaHrMark, QrestaInvoiceMark, QrestaMark } from '@/components/brand';
 import { FOUNDER, PRODUCTS, SITE_NAME } from '@/lib/site';
 
-/* The company page. Three products now share this domain, so this is
-   where a visitor learns who builds them and how the company thinks,
-   rather than reading about restaurants alone.
+/* The company page. Five products share this domain, so this is where a
+   visitor learns who builds them and how the company thinks, rather than
+   reading about one product alone.
 
    Same rule as every other page here: no business metrics we cannot
    evidence. Customer counts, order volumes and satisfaction scores stay
@@ -17,34 +17,36 @@ import { FOUNDER, PRODUCTS, SITE_NAME } from '@/lib/site';
 const PRINCIPLES = [
   {
     title: 'Build for one floor at a time',
-    body: 'A dine-in restaurant, a delivery-only kitchen and a gym do not run the same way. We ship three products rather than one product with three sets of settings, because the settings version always fits somebody badly.',
+    body: 'A dine-in restaurant, a gym, a delivery-only kitchen, a billing counter and an HR desk do not run the same way. We ship five products rather than one product with five sets of settings, because the settings version always fits somebody badly.',
   },
   {
     title: 'Assume the connection will drop',
-    body: 'Software for a counter has to survive a bad link, a power cut and a busy hour at the same time. Billing and order capture run locally and reconcile later — that is a design decision made early, not a feature added after complaints.',
+    body: 'Software for a counter has to survive a bad link, a power cut and a busy hour at the same time. The restaurant till bills locally and reconciles later, and the HR app queues punches made offline — decisions made early, not features added after complaints.',
   },
   {
-    title: 'Never sit between you and your money',
-    body: 'Customers pay into your own payment gateway, and settlements land in your account. We charge for the software. We do not take a cut of what you sell, and we do not hold your takings overnight.',
+    title: 'Let customers pay you directly',
+    body: 'In FitBizz and Qresta Invoice, customers pay only into your own payment gateway — there is no Qresta account in between. In Restaurant Management they do too once the outlet connects its own gateway; until then, guest QR payments go through Qresta’s PayU account. Gateway keys are stored encrypted and never shown back to anyone.',
   },
   {
     title: 'Make the record answerable',
-    body: 'A discount, a refund, a cancelled order, a stock adjustment — each one is written down with who did it and why. When the month does not add up, the answer should be in the system rather than in somebody’s memory.',
+    body: 'A discount, a refund, a cancelled order, a stock adjustment — each one stays on the record, and a void or a refund asks for a reason. When the month does not add up, the answer should be in the system rather than in somebody’s memory.',
   },
 ];
 
 /** Product facts, not business claims — each one is checkable in the software. */
 const FACTS = [
-  { number: '3', title: 'Products', sub: 'Restaurant, cloud kitchen, gym' },
-  { number: '1', title: 'Platform underneath', sub: 'Shared billing, roles, GST, audit' },
-  { number: 'Offline', title: 'Billing keeps running', sub: 'Queued locally, reconciled after' },
-  { number: 'India', title: 'Built for and built in', sub: 'Odisha — GST, UPI, aggregators' },
+  { number: '5', title: 'Products', sub: 'Restaurant, gym, cloud kitchen, billing, HR' },
+  { number: '9', title: 'Payment gateways', sub: 'You connect, in Restaurant and FitBizz' },
+  { number: 'Offline', title: 'The restaurant till keeps billing', sub: 'Queued locally, reconciled after' },
+  { number: 'India', title: 'Built for and built in', sub: 'Odisha — GST, UPI, Indian payroll' },
 ];
 
 const MARKS: Record<string, (p: { size?: number }) => React.ReactNode> = {
   restaurant: ({ size = 28 }) => <QrestaMark size={size} />,
   cloudkitchen: ({ size = 28 }) => <CloudKitchenMark size={size} />,
   fitbizz: ({ size = 28 }) => <FitBizzMark size={size} />,
+  invoice: ({ size = 28 }) => <QrestaInvoiceMark size={size} />,
+  hr: ({ size = 28 }) => <QrestaHrMark size={size} />,
 };
 
 export default function AboutPage() {
@@ -67,9 +69,9 @@ export default function AboutPage() {
             Software built by people who have watched the rush hour.
           </h1>
           <p className="text-base sm:text-lg" style={{ color: 'var(--ink-soft)', lineHeight: 1.6 }}>
-            {SITE_NAME} builds the systems Indian food and fitness businesses run on — a
-            restaurant floor, a delivery-only kitchen and a gym each get a product shaped around
-            how that business actually works, on one platform underneath.
+            {SITE_NAME} builds the systems Indian businesses run on — a restaurant floor, a gym,
+            a delivery-only kitchen, a billing counter and an HR desk each get a product shaped
+            around how that work actually happens.
           </p>
         </div>
       </section>
@@ -88,8 +90,8 @@ export default function AboutPage() {
           <div className="rounded-2xl p-7 card-lit">
             <div className="font-display text-lg font-semibold mb-2">Where we are going</div>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-              To be the software an Indian food or fitness business picks first and does not
-              outgrow — from a single counter to several outlets and several brands, without
+              To be the software an Indian business picks first and does not outgrow — from a
+              single counter to several outlets, several brands and a growing team, without
               starting over each time it grows.
             </p>
           </div>
@@ -103,15 +105,15 @@ export default function AboutPage() {
             What we build
           </h2>
           <p className="mx-auto text-base" style={{ color: 'var(--ink-soft)', maxWidth: 560 }}>
-            Three products, each with its own screens, its own vocabulary and its own idea of
+            Five products, each with its own screens, its own vocabulary and its own idea of
             what a busy hour looks like.
           </p>
         </div>
-        <div className="grid sm:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {PRODUCTS.map((p) => {
             const Mark = MARKS[p.key];
             return (
-              <Link key={p.key} href={p.path} className="group rounded-2xl p-6 card-lit transition-colors hover:bg-white/[0.03]">
+              <Link key={p.key} href={p.href} className="group rounded-2xl p-6 card-lit transition-colors hover:bg-white/[0.03]">
                 <Mark size={30} />
                 <div className="font-display text-lg font-semibold mt-4 mb-1">{p.label}</div>
                 <div className="text-xs font-semibold mb-2" style={{ color: 'var(--blue-500)' }}>
@@ -181,8 +183,8 @@ export default function AboutPage() {
         </div>
         <p className="font-display text-xl leading-relaxed mb-6">
           I started {SITE_NAME} to help small and large businesses digitise how they run — and
-          the more floors we sat behind, the clearer it became that a restaurant, a cloud
-          kitchen and a gym each deserve their own product rather than a compromise.
+          the more businesses we sat behind, the clearer it became that each kind of work
+          deserves its own product rather than a compromise.
         </p>
         <Link href="/founder" className="font-semibold">
           {FOUNDER.name}
@@ -219,7 +221,7 @@ export default function AboutPage() {
               See it running on your own business.
             </h2>
             <p className="mx-auto mb-8 text-base" style={{ color: 'rgba(255,255,255,0.86)', maxWidth: 520 }}>
-              Twenty minutes, on your own menu, dishes or membership plans.
+              Twenty minutes, on your own menu, membership plans, items or team.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button onClick={openDemoModal} className="rounded-xl px-6 py-3.5 text-sm font-bold" style={{ background: '#fff', color: 'var(--blue-700)' }}>

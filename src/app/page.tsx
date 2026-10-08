@@ -1,5 +1,5 @@
 import HomeContent from './home-content';
-import { PRODUCTS, SITE_NAME, SITE_URL } from '@/lib/site';
+import { PRODUCTS, productUrl, SITE_NAME, SITE_URL } from '@/lib/site';
 
 // The page itself is a client component (modals, dropdowns), and a
 // client component cannot export `metadata` — hence this thin server
@@ -7,9 +7,9 @@ import { PRODUCTS, SITE_NAME, SITE_URL } from '@/lib/site';
 // metadata of its own: the root layout's default title, description and
 // canonical ("/") are already the ones this page wants.
 export default function Page() {
-  // An ItemList of the three products, so a search engine reading the
-  // company page can see what Qresta sells and follow each one to its
-  // own SoftwareApplication node. The Organization and WebSite nodes
+  // An ItemList of the five products, so a search engine reading the
+  // company page can see everything Qresta sells, each pointing at its own
+  // page where one exists and at its section of this page otherwise. The Organization and WebSite nodes
   // come from the root layout's StructuredData.
   const productList = {
     '@context': 'https://schema.org',
@@ -23,7 +23,7 @@ export default function Page() {
       position: i + 1,
       name: p.brandName,
       description: p.blurb,
-      url: `${SITE_URL}${p.path}`,
+      url: productUrl(p),
     })),
   };
 

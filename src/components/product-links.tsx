@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { PRODUCTS } from '@/lib/site';
 
 /**
- * The three products, rendered the same way in every footer on the
- * domain — company, restaurant, cloud kitchen and gym. Whichever site a
- * visitor lands on, the other two are one click away, and search engines
- * see all three linked from every page.
+ * The five products, rendered the same way in every footer on the
+ * domain. Each links to its section on the single home page, so whichever
+ * page a visitor is on, every product is one click away.
  *
  * `current` dims the product whose own site you are already reading.
  */
@@ -19,7 +18,7 @@ export function ProductLinks({ current, title = 'Products' }: { current?: string
         {PRODUCTS.map((p) => (
           <Link
             key={p.key}
-            href={p.path}
+            href={p.href}
             className="transition-colors hover:text-white"
             style={p.key === current ? { color: 'var(--ink)', fontWeight: 600 } : undefined}
           >

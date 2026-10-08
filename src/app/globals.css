@@ -140,3 +140,11 @@ input[type='time'] {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* In-page jumps between the home page product sections glide, unless the
+   visitor has asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

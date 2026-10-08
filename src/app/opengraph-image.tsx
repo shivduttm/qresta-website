@@ -80,12 +80,12 @@ export default function Image() {
             maxWidth: 940,
           }}
         >
-          The software Indian restaurants, kitchens and gyms run on.
+          Five products. One company. Built in India.
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', fontSize: 27, color: '#9DABCD' }}>
-            Restaurant Management · Cloud Kitchen · Gym Automation
+            Restaurant · Gym · Cloud Kitchen · GST Billing · HR
           </div>
           <div style={{ display: 'flex', fontSize: 27, color: '#3B76FF', fontWeight: 600 }}>qresta.in</div>
         </div>

@@ -151,3 +151,46 @@ export function CloudKitchenWordmark({ size = 20 }: { size?: number }) {
     </span>
   );
 }
+
+
+/**
+ * The Qresta HR mark — geometry copied from qresta-hr/brand/icon.svg (a
+ * 1024 canvas, rx 220 blue tile, two people from a 48-unit box scaled by
+ * 17.07 about its centre), so it matches the app's sidebar and icon.
+ */
+export function QrestaHrMark({ size = 40, title = 'Qresta HR', tile = true }: { size?: number; title?: string; tile?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 1024 1024" role="img" aria-label={title} style={{ flexShrink: 0 }}>
+      {tile && <rect width="1024" height="1024" rx="220" fill="#1E5EFF" />}
+      <g transform="translate(512 512) scale(17.07) translate(-25 -24.5)">
+        <g fill="#fff" opacity="0.62">
+          <circle cx="32" cy="16" r="4.8" />
+          <path d="M22.5 33.6a9.8 9.8 0 0 1 19.6 0v1.2a1.5 1.5 0 0 1-1.5 1.5H24a1.5 1.5 0 0 1-1.5-1.5z" />
+        </g>
+        <g fill="#fff" stroke="#1E5EFF" strokeWidth="2.2" paintOrder="stroke">
+          <circle cx="19.5" cy="17" r="5.8" />
+          <path d="M8 36.4a11.5 11.5 0 0 1 23 0v1.1a1.7 1.7 0 0 1-1.7 1.7H9.7A1.7 1.7 0 0 1 8 37.5z" />
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+/**
+ * The Qresta Invoice mark. The Invoice app's own icon is the plain Qresta
+ * mark (qresta-invoice/src/app/icon.svg), so this is the Qresta tile with a
+ * small invoice sheet badge in the corner — distinct on a page that shows
+ * five products side by side, still unmistakably the same family.
+ */
+export function QrestaInvoiceMark({ size = 40, title = 'Qresta Invoice' }: { size?: number; title?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" role="img" aria-label={title} style={{ flexShrink: 0 }}>
+      <rect width="48" height="48" rx="12" fill="#1E5EFF" />
+      <path d="M15 10h13l6 6v20.5a1.5 1.5 0 0 1-1.5 1.5h-17a1.5 1.5 0 0 1-1.5-1.5v-25A1.5 1.5 0 0 1 15 10z" fill="#fff" />
+      <path d="M28 10v6h6" fill="#BFD0FF" />
+      <path d="M18.5 21h11M18.5 25h11M18.5 29h6" stroke="#1E5EFF" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="31" cy="32" r="4.6" fill="#12B76A" stroke="#fff" strokeWidth="1.6" />
+      <path d="M29 32l1.4 1.4 2.6-2.8" stroke="#fff" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

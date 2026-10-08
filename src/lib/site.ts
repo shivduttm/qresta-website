@@ -10,10 +10,10 @@ export const SITE_URL = 'https://qresta.in';
 
 export const SITE_NAME = 'Qresta';
 
-export const SITE_TAGLINE = 'Operating software for restaurants, cloud kitchens and gyms';
+export const SITE_TAGLINE = 'Software for restaurants, gyms, cloud kitchens, billing and HR';
 
 export const SITE_DESCRIPTION =
-  'Qresta builds the software Indian food and fitness businesses run on: Restaurant Management for dine-in and takeaway, CloudKitchen for delivery-only kitchens, and FitBizz for gyms and studios — each offline-aware, GST-ready and built for how these floors actually work.';
+  'Qresta builds the software Indian businesses run on: Restaurant Management for dine-in and takeaway, FitBizz for gyms and studios, CloudKitchen for delivery-only kitchens, Qresta Invoice for GST billing and receivables, and Qresta HR for people, attendance and payroll — five products from one company, built in India.';
 
 export const CONTACT = {
   email: 'info@qresta.in',
@@ -31,7 +31,7 @@ export const FOUNDER = {
   /** Stable node id so every page's JSON-LD points at the same person. */
   id: `${SITE_URL}/founder#shivdutt-mohanty`,
   description:
-    'Shivdutt Mohanty is the Founder & CEO of Qresta, a restaurant technology platform helping restaurants and cafes run billing, kitchen, QR ordering and online orders on one system.',
+    'Shivdutt Mohanty is the Founder & CEO of Qresta, which builds the software Indian businesses run on: Restaurant Management, FitBizz for gyms, CloudKitchen for delivery-only kitchens, Qresta Invoice for GST billing and Qresta HR for HR and payroll.',
 } as const;
 
 /**
@@ -74,6 +74,7 @@ export const DISALLOWED_PATHS = [
   '/adminmanagementportal',
   '/login',
   '/forgot-password',
+  '/signup',
   '/menu/',
   '/order/',
   '/stall/',
@@ -95,6 +96,11 @@ export const DISALLOWED_PATHS = [
   '/cloudkitchen/forgot-password',
   '/cloudkitchen/dashboard',
   '/cloudkitchen/_next/',
+  // Qresta Invoice has no marketing page here — it is sold from the home
+  // page's #invoice section — so its whole prefix is app: sign-in, every
+  // organisation's books, printable invoices and the tokenised customer
+  // portal links, none of which belong in a search index.
+  '/invoice',
 ];
 
 /**
@@ -147,47 +153,133 @@ export const CLOUDKITCHEN = {
 } as const;
 
 /**
- * The three products, in the order the company leads with them. This is
- * the one list the home page, every footer and the products nav read
- * from, so a fourth product is a single edit here.
+ * The fourth product, GST billing. The app is served at qresta.in/invoice
+ * (see next.config.ts); there is no separate marketing page, so the
+ * product is sold from the home page's #invoice section.
+ */
+export const INVOICE = {
+  name: 'Qresta Invoice',
+  brandName: 'Qresta Invoice',
+  tagline: 'GST billing and invoicing software by Qresta',
+  description:
+    'Qresta Invoice runs quotes, sales orders, delivery challans and GST tax invoices, purchases and expenses, payments and receivables, inventory and GSTR-1 / GSTR-3B returns for Indian businesses.',
+  appPath: '/invoice',
+} as const;
+
+/**
+ * The fifth product, HRMS and payroll. Its app will be served at
+ * qresta.in/hrsolution once its services are deployed; until then nothing
+ * on this site links there and next.config.ts carries no rule for it. The
+ * product is sold from the home page's #hr section.
+ */
+export const HR = {
+  name: 'Qresta HR',
+  brandName: 'Qresta HR',
+  tagline: 'HR and payroll software by Qresta',
+  description:
+    'Qresta HR keeps employee records, attendance, shifts and leave, payroll with Indian statutory deductions, hiring, performance and an employee app on one system for Indian companies.',
+} as const;
+
+/**
+ * The five products, in the order the home page presents them. This is
+ * the one list the home page, every footer, the company nav, the contact
+ * form and the structured data read from, so a sixth product is a single
+ * edit here (plus its section data in home-content.tsx).
  *
- * `label` is what a visitor sees in navigation — the category, because
- * that is what they are looking for. `name` is the brand.
+ * `label` is the category a visitor searches for; `name` is the brand;
+ * `short` is what fits in a pill. `href` is where every link on the
+ * site sends a visitor: the product's section on the single home page.
+ * `page` is the product's own standalone marketing page, where one
+ * exists — kept for search engines and links already shared, and used for
+ * the structured data's canonical URL.
  */
 export const PRODUCTS = [
   {
     key: 'restaurant',
     label: 'Restaurant Management',
+    short: 'Restaurant',
     name: RESTAURANT.name,
     brandName: RESTAURANT.brandName,
-    path: RESTAURANT.path,
-    for: 'Dine-in, cafés, QSR, bars and food courts',
+    href: '/#restaurant',
+    page: RESTAURANT.path as string | null,
+    for: 'Dine-in restaurants, cafés, QSR and food stalls',
     blurb:
-      'Billing that keeps working when the internet does not, a kitchen display that routes by station, QR ordering at the table, and Zomato and Swiggy in the same queue as everything else.',
-    points: ['Offline-first POS and GST invoices', 'KOT, kitchen display and QR ordering', 'Online orders, inventory and head office'],
-  },
-  {
-    key: 'cloudkitchen',
-    label: 'Cloud Kitchen',
-    name: CLOUDKITCHEN.name,
-    brandName: CLOUDKITCHEN.brandName,
-    path: CLOUDKITCHEN.path,
-    for: 'Delivery-only kitchens running one or many brands',
-    blurb:
-      'Every channel in one queue, a kitchen display that keeps time by station, and a recipe behind each dish so you know what the plate actually earns.',
-    points: ['Swiggy, Zomato, ONDC and your own orders', 'Kitchen display with live prep timers', 'Recipe costing, inventory and dispatch'],
+      'Billing on the web or on a Windows till that works offline, a kitchen display that routes by station, QR ordering at the table, and online orders, stock and reports for one outlet or a chain.',
+    points: ['POS billing and an offline Windows till', 'KOT, kitchen display and QR ordering', 'Online orders, inventory and Head Office'],
   },
   {
     key: 'fitbizz',
     label: 'Gym Automation',
+    short: 'FitBizz',
     name: FITBIZZ.name,
     brandName: FITBIZZ.brandName,
-    path: FITBIZZ.path,
+    href: '/#fitbizz',
+    page: FITBIZZ.path as string | null,
     for: 'Gyms, fitness studios and personal training',
     blurb:
-      'Memberships, QR and biometric check-in, trainers and PT packages, GST invoices and a supplements counter — with members paying into the gym’s own account.',
+      'Memberships, desk, kiosk and biometric check-in, trainers and PT packages, GST invoices and a supplements counter — with members paying into the gym’s own account.',
     points: ['Memberships, renewals and check-in', 'Trainers, PT packages and progress', 'GST billing into your own gateway'],
   },
+  {
+    key: 'cloudkitchen',
+    label: 'Cloud Kitchen',
+    short: 'CloudKitchen',
+    name: CLOUDKITCHEN.name,
+    brandName: CLOUDKITCHEN.brandName,
+    href: '/#cloudkitchen',
+    page: CLOUDKITCHEN.path as string | null,
+    for: 'Delivery-only kitchens running one or many brands',
+    blurb:
+      'One order flow for every channel, a kitchen display that splits each order by station and keeps time, and a recipe behind each dish so you know what the plate actually earns.',
+    points: ['Every channel in one order flow', 'Per-station kitchen display with timers', 'Recipe costing, inventory and dispatch'],
+  },
+  {
+    key: 'invoice',
+    label: 'GST Billing & Invoicing',
+    short: 'Invoice',
+    name: INVOICE.name,
+    brandName: INVOICE.brandName,
+    href: '/#invoice',
+    page: null as string | null,
+    for: 'Traders, retail counters, service firms and exporters',
+    blurb:
+      'Quotes that become sales orders, challans and GST tax invoices, purchases that feed input tax credit, payments applied against what is owed, and GST returns built from the same records.',
+    points: ['Quotes, invoices, credit notes and purchases', 'GSTR-1, GSTR-3B and HSN summary', 'Quick Bill counter, stock and receivables'],
+  },
+  {
+    key: 'hr',
+    label: 'HR & Payroll',
+    short: 'HR',
+    name: HR.name,
+    brandName: HR.brandName,
+    href: '/#hr',
+    page: null as string | null,
+    for: 'Indian companies with teams, shifts and payroll to run',
+    blurb:
+      'Employee records, attendance and leave, and India payroll with PF, ESI, PT and TDS on one system — with an app your people use for punches, leave and payslips.',
+    points: ['Employee records and org structure', 'Attendance, shifts, leave and holidays', 'Payroll, payslips and statutory deductions'],
+  },
 ] as const;
+
+export type Product = (typeof PRODUCTS)[number];
+
+/** Absolute canonical URL for a product: its own page if it has one, else its home-page section. */
+export function productUrl(p: Product): string {
+  return p.page ? `${SITE_URL}${p.page}` : `${SITE_URL}${p.href}`;
+}
+
+/**
+ * Stable schema.org @id for a product's Brand node. Products with their
+ * own page keep the id they have always had (`/fitbizz#brand`), so search
+ * engines see the same node across this change.
+ */
+export function productBrandId(p: Product): string {
+  return p.page ? `${SITE_URL}${p.page}#brand` : `${SITE_URL}/#${p.key}-brand`;
+}
+
+/** The image a product's Brand node cites: its share card, or the company logo. */
+export function productLogo(p: Product): string {
+  return p.page ? `${SITE_URL}${p.page}/opengraph-image` : `${SITE_URL}/qresta-logo.png`;
+}
 
 export type ProductKey = (typeof PRODUCTS)[number]['key'];

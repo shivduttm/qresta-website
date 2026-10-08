@@ -87,7 +87,7 @@ export function CompanyHeader() {
           {open && (
             <div className="absolute top-full left-0 mt-2 rounded-2xl p-2 grid gap-1 w-[420px] card-lit" style={{ boxShadow: '0 24px 60px -24px rgba(0,0,0,0.8)' }}>
               {PRODUCTS.map((p) => (
-                <Link key={p.key} href={p.path} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5">
+                <Link key={p.key} href={p.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5">
                   <div className="text-sm font-semibold">{p.label}</div>
                   <div className="text-xs mt-0.5" style={{ color: 'var(--ink-faint)' }}>
                     {p.for}
@@ -126,7 +126,7 @@ export function CompanyHeader() {
         <div className="lg:hidden px-5 pb-5" style={{ background: 'rgba(6,10,23,0.97)', borderBottom: '1px solid var(--line)' }}>
           <div className="grid gap-1 pt-1">
             {PRODUCTS.map((p) => (
-              <Link key={p.key} href={p.path} onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 hover:bg-white/5">
+              <Link key={p.key} href={p.href} onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 hover:bg-white/5">
                 <div className="text-sm font-semibold">{p.label}</div>
                 <div className="text-xs mt-0.5" style={{ color: 'var(--ink-faint)' }}>
                   {p.for}
@@ -157,9 +157,9 @@ export function CompanyFooter() {
               <span className="font-display text-lg font-bold tracking-tight">{SITE_NAME}</span>
             </Link>
             <p className="text-sm mt-4 max-w-sm leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-              We build the software Indian food and fitness businesses run on — a restaurant
-              floor, a delivery-only kitchen and a gym each get a product built for how that
-              business actually works, not a general tool bent to fit.
+              We build the software Indian businesses run on — a restaurant floor, a gym, a
+              delivery-only kitchen, a billing counter and an HR desk each get a product built
+              for how that work actually happens, not a general tool bent to fit.
             </p>
             <div className="grid gap-1.5 text-sm mt-5" style={{ color: 'var(--ink-soft)' }}>
               <a href={`mailto:${CONTACT.email}`} className="hover:underline">
@@ -187,9 +187,11 @@ export function CompanyFooter() {
             <FooterColumn
               title="Talk to a product"
               links={[
-                { label: 'Restaurant enquiry', href: '/contact' },
-                { label: 'Cloud kitchen enquiry', href: '/cloudkitchen/contact' },
+                { label: 'Restaurant enquiry', href: '/contact?product=restaurant' },
                 { label: 'Gym enquiry', href: '/fitbizz/contact' },
+                { label: 'Cloud kitchen enquiry', href: '/cloudkitchen/contact' },
+                { label: 'Billing & invoicing enquiry', href: '/contact?product=invoice' },
+                { label: 'HR & payroll enquiry', href: '/contact?product=hr' },
               ]}
             />
           </div>

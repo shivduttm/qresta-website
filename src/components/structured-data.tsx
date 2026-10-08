@@ -1,6 +1,9 @@
 import {
   CONTACT,
   PRODUCTS,
+  productBrandId,
+  productLogo,
+  productUrl,
   FOUNDER,
   FOUNDER_PROFILES,
   ORG_PROFILES,
@@ -48,10 +51,10 @@ export function StructuredData() {
       // below rather than repeating the name inline.
       founder: { '@id': FOUNDER.id },
       employee: { '@id': FOUNDER.id },
-      // Every product line, so 'FitBizz by Qresta' or 'CloudKitchen by
-      // Qresta' resolves to this company rather than to an unrelated
-      // brand of the same name.
-      brand: PRODUCTS.map((p) => ({ '@id': `${SITE_URL}${p.path}#brand` })),
+      // Every product line, so 'FitBizz by Qresta' or 'Qresta Invoice'
+      // resolves to this company rather than to an unrelated brand of the
+      // same name.
+      brand: PRODUCTS.map((p) => ({ '@id': productBrandId(p) })),
       contactPoint: [
         {
           '@type': 'ContactPoint',
@@ -86,12 +89,12 @@ export function StructuredData() {
     },
     ...PRODUCTS.map((p) => ({
       '@type': 'Brand',
-      '@id': `${SITE_URL}${p.path}#brand`,
+      '@id': productBrandId(p),
       name: p.name,
       alternateName: p.brandName,
       description: p.blurb,
-      url: `${SITE_URL}${p.path}`,
-      logo: `${SITE_URL}${p.path}/opengraph-image`,
+      url: productUrl(p),
+      logo: productLogo(p),
     })),
     {
       '@type': 'WebSite',

@@ -43,8 +43,12 @@ export const metadata: Metadata = {
     'cloud kitchen software India',
     'CloudKitchen by Qresta',
     'gym management software India',
-    'FitBizz by Qresta',
     'GST billing software India',
+    'invoicing software India',
+    'HR and payroll software India',
+    'FitBizz by Qresta',
+    'Qresta Invoice',
+    'Qresta HR',
     'kitchen display system',
     'QR menu ordering',
   ],
@@ -100,7 +104,9 @@ export const metadata: Metadata = {
 // footer is worse than a missing one.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+    // data-scroll-behavior tells the Next router to switch the global smooth
+    // scroll off during route changes, so only same-page jumps glide.
+    <html lang="en-IN" data-scroll-behavior="smooth" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <body>
         <StructuredData />
         <LeadModalsProvider>

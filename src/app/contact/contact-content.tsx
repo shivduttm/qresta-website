@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { submitContactEnquiry, ApiError } from '@/lib/api';
 import { CONTACT, PRODUCTS, SITE_NAME, type ProductKey } from '@/lib/site';
 
 /**
- * The company's contact page. Three products share this form, so the
+ * The company's contact page. Five products share this form, so the
  * first thing it asks is which business you run — that decides the
  * wording, the subject prefix the team sorts on, and which topics you
  * are offered. The product sites keep their own contact pages for
@@ -24,25 +25,51 @@ const TOPICS: Record<ProductKey, string[]> = {
   restaurant: ['Billing & GST invoices', 'Kitchen display & KOT', 'QR scan and order', 'Zomato & Swiggy orders', 'Inventory & recipes', 'Multi-outlet & reports', 'Moving from another software', 'Something else'],
   cloudkitchen: ['Aggregator orders in one queue', 'Kitchen display & stations', 'Recipes, food cost & inventory', 'Delivery, riders & cash on delivery', 'Running several brands', 'Moving from another software', 'Something else'],
   fitbizz: ['Memberships & check-in', 'Trainers & personal training', 'Connecting my payment gateway', 'GST invoices & supplements POS', 'Moving from another software', 'Something else'],
+  invoice: ['GST invoices & quotes', 'Purchases, bills & expenses', 'GSTR-1 & GSTR-3B returns', 'Counter billing (Quick Bill)', 'Inventory & stock', 'Payments & receivables', 'Moving from another software', 'Something else'],
+  hr: ['Employee records & onboarding', 'Attendance & shifts', 'Leave & holidays', 'Payroll & statutory compliance', 'Hiring', 'Moving from another software', 'Something else'],
 };
 
 const BUSINESS_LABEL: Record<ProductKey, string> = {
   restaurant: 'Restaurant / café name',
   cloudkitchen: 'Kitchen / brand name',
   fitbizz: 'Gym / studio name',
+  invoice: 'Business name',
+  hr: 'Company name',
 };
 
 const PLACEHOLDER: Record<ProductKey, string> = {
   restaurant: 'Tell us about your restaurant — outlets, covers, what you bill on today (optional)',
   cloudkitchen: 'Tell us about your kitchen — brands, channels, orders a day (optional)',
   fitbizz: 'Tell us about your gym — members, branches, what you use today (optional)',
+  invoice: 'Tell us about your business — what you sell, invoices a month, GST registration (optional)',
+  hr: 'Tell us about your company — headcount, locations, what runs payroll today (optional)',
 };
 
 const TAG: Record<ProductKey, string> = {
   restaurant: '[Restaurant]',
   cloudkitchen: '[CloudKitchen]',
   fitbizz: '[FitBizz]',
+  invoice: '[Invoice]',
+  hr: '[HR]',
 };
+
+/**
+ * Reads ?product= so a link from the Invoice or HR sections (or a footer
+ * enquiry link) opens the form for that product. It sits in its own
+ * Suspense boundary so the rest of the page stays prerendered, and it
+ * follows the value rather than running once, because the footer links
+ * here from /contact itself.
+ */
+function ProductFromQuery({ onPick }: { onPick: (key: ProductKey) => void }) {
+  const q = useSearchParams().get('product');
+  useEffect(() => {
+    const match = PRODUCTS.find((p) => p.key === q);
+    if (match) onPick(match.key);
+    // onPick is a fresh closure each render; only the query value matters.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
+  return null;
+}
 
 export default function ContactPage() {
   const [product, setProduct] = useState<ProductKey>('restaurant');
@@ -97,6 +124,9 @@ export default function ContactPage() {
 
   return (
     <div className="relative overflow-x-hidden">
+      <Suspense fallback={null}>
+        <ProductFromQuery onPick={pickProduct} />
+      </Suspense>
       <div className="absolute inset-0 grid-bg pointer-events-none" style={{ height: 600 }} />
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6 pt-14 sm:pt-20 pb-20">
         <div className="max-w-2xl">
@@ -111,7 +141,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-base sm:text-lg" style={{ color: 'var(--ink-soft)', lineHeight: 1.6 }}>
             Tell us what you run and what is not working today. We will show you the product
-            built for it, set up on your own menu, dishes or membership plans.
+            built for it, set up on your own data.
           </p>
         </div>
 
@@ -154,7 +184,7 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-              <Link href={chosen.path} className="inline-flex items-center gap-2 text-sm font-bold mt-5" style={{ color: 'var(--blue-500)' }}>
+              <Link href={chosen.href} className="inline-flex items-center gap-2 text-sm font-bold mt-5" style={{ color: 'var(--blue-500)' }}>
                 Read more about {chosen.label}
                 <span aria-hidden="true">→</span>
               </Link>
@@ -202,7 +232,7 @@ export default function ContactPage() {
                 <label className="block text-[11px] font-mono uppercase tracking-[0.14em] mb-2" style={{ color: 'var(--ink-faint)' }}>
                   What do you run?
                 </label>
-                <div className="grid sm:grid-cols-3 gap-2 mb-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
                   {PRODUCTS.map((p) => (
                     <button
                       key={p.key}

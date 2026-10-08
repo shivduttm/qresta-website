@@ -85,7 +85,7 @@ const PRODUCT_FACTS = [
   { value: '9', label: 'Payment gateways you can connect', sub: 'Members pay you, not us' },
   { value: '5', label: 'Staff roles with a permissions matrix', sub: 'Owner, manager, front desk, trainer, accountant' },
   { value: '3', label: 'Ways for a member to check in', sub: 'Front desk, QR kiosk, biometric device' },
-  { value: '8', label: 'Reports, each exportable to CSV', sub: 'Revenue, dues, attendance, PT and more' },
+  { value: '8', label: 'Built-in reports', sub: '6 of them export to CSV — revenue, dues, trainers and more' },
 ];
 
 const CUSTOMER_TYPES = [
@@ -577,7 +577,7 @@ function OwnerView({ onDemo }: { onDemo: () => void }) {
         <div>
           <SectionLabel>Owner’s view</SectionLabel>
           <h2 className="font-display font-bold mb-5" style={{ fontSize: 'clamp(1.75rem, 3.6vw, 2.5rem)', letterSpacing: '-0.02em', lineHeight: 1.12 }}>
-            Every branch in your pocket. Every role sees only its own work.
+            Every branch in your pocket. Every role set to what it should do.
           </h2>
           <div className="grid gap-3 mb-7">
             {OWNER_POINTS.map((p) => (

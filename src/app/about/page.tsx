@@ -4,14 +4,14 @@ import AboutContent from './about-content';
 export const metadata: Metadata = {
   // Absolute: the layout template would otherwise render this as
   // "About Qresta · Qresta".
-  title: { absolute: 'About Qresta | Restaurant, cloud kitchen and gym software' },
+  title: { absolute: 'About Qresta | Restaurant, gym, cloud kitchen, billing and HR software' },
   description:
-    'Qresta builds operating software for Indian food and fitness businesses — Restaurant Management, CloudKitchen for delivery-only kitchens and FitBizz for gyms, on one platform. Founded by Shivdutt Mohanty.',
+    'Qresta builds software for Indian businesses — Restaurant Management, FitBizz for gyms, CloudKitchen for delivery-only kitchens, Qresta Invoice for GST billing and Qresta HR for payroll. Founded by Shivdutt Mohanty.',
   alternates: { canonical: '/about' },
   openGraph: {
     title: 'About Qresta',
     description:
-      'Three products on one platform: restaurant management, cloud kitchen software and gym automation, built in India.',
+      'Five products from one company: restaurant management, gym automation, cloud kitchen software, GST billing and HR, built in India.',
     url: '/about',
   },
 };

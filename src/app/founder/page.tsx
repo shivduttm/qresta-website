@@ -47,19 +47,20 @@ export default function FounderPage() {
 
       <div className="grid gap-6 text-sm" style={{ color: 'var(--ink-soft)' }}>
         <p>
-          Shivdutt Mohanty is the founder and CEO of Qresta, a restaurant SaaS platform
-          focused on helping restaurants and cafes digitise their operations.
+          Shivdutt Mohanty is the founder and CEO of Qresta, which builds five products for
+          Indian businesses: Restaurant Management, FitBizz for gyms, CloudKitchen for
+          delivery-only kitchens, Qresta Invoice for GST billing and Qresta HR for HR and payroll.
         </p>
         <p>
-          He started Qresta with a straightforward goal: to make modern restaurant
-          technology — digital menus, QR ordering, kitchen and waiter workflows,
-          automation — accessible to businesses of every size, not just large chains
-          with dedicated IT teams.
+          He started Qresta with a straightforward goal: to help small and large businesses
+          digitise how they run, without needing a dedicated IT team to get there. It began
+          with restaurant technology — digital menus, QR ordering, kitchen and waiter
+          workflows — and grew into a product for each kind of work.
         </p>
         <p>
-          Qresta itself reflects that goal directly: one platform covering digital
-          menus, QR ordering, waiter and chef operations, and the day-to-day
-          automation a restaurant actually needs to run.
+          Qresta itself reflects that goal directly: a product built for each kind of work —
+          the restaurant floor, the gym, the delivery-only kitchen, the billing counter and
+          the HR desk — rather than one tool bent to fit all of them.
         </p>
       </div>
 
