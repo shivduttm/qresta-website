@@ -101,6 +101,24 @@ export const DISALLOWED_PATHS = [
   // organisation's books, printable invoices and the tokenised customer
   // portal links, none of which belong in a search index.
   '/invoice',
+  // Qresta HR's sign-in, account recovery and every portal (admin,
+  // manager, employee, recruiter, candidate, Qresta staff) are private.
+  // The bare /hrsolution portal chooser and the public job listings under
+  // /hrsolution/careers/ stay indexable.
+  '/hrsolution/login',
+  '/hrsolution/forgot-password',
+  '/hrsolution/reset-password',
+  '/hrsolution/mfa',
+  '/hrsolution/sso',
+  '/hrsolution/admin',
+  '/hrsolution/manager',
+  '/hrsolution/employee',
+  '/hrsolution/recruiter',
+  '/hrsolution/candidate',
+  '/hrsolution/platform',
+  '/hrsolution/build-id',
+  '/hrsolution/api/',
+  '/hrsolution/_next/',
 ];
 
 /**
@@ -167,10 +185,9 @@ export const INVOICE = {
 } as const;
 
 /**
- * The fifth product, HRMS and payroll. Its app will be served at
- * qresta.in/hrsolution once its services are deployed; until then nothing
- * on this site links there and next.config.ts carries no rule for it. The
- * product is sold from the home page's #hr section.
+ * The fifth product, HRMS and payroll. The app is served at
+ * qresta.in/hrsolution (see next.config.ts); there is no separate marketing
+ * page, so the product is sold from the home page's #hr section.
  */
 export const HR = {
   name: 'Qresta HR',
@@ -178,6 +195,8 @@ export const HR = {
   tagline: 'HR and payroll software by Qresta',
   description:
     'Qresta HR keeps employee records, attendance, shifts and leave, payroll with Indian statutory deductions, hiring, performance and an employee app on one system for Indian companies.',
+  appPath: '/hrsolution',
+  loginPath: '/hrsolution/login',
 } as const;
 
 /**

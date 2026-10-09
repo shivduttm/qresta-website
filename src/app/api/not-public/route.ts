@@ -10,6 +10,10 @@ import { NextResponse } from 'next/server';
  * the edge that publishes it. qresta-api reaches those routes directly
  * at qresta-invoice.railway.internal, which never passes through this
  * site.
+ *
+ * Qresta HR's /hrsolution/api/<version>/platform-admins is refused here
+ * too, and again inside qresta-hr-web; qresta-api reaches it directly at
+ * qresta-hr-api.railway.internal.
  */
 export const dynamic = 'force-dynamic';
 

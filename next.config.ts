@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
     const CLOUDKITCHEN_ORIGIN = 'http://cloudkitchen-web.railway.internal:8080';
     // Qresta Invoice (GST billing), another basePath service, at '/invoice'.
     const INVOICE_ORIGIN = 'http://qresta-invoice.railway.internal:8080';
+    // Qresta HR (HRMS and payroll), a basePath service at '/hrsolution'. Its
+    // web service also proxies /hrsolution/api/* to its API privately.
+    const HR_ORIGIN = 'http://qresta-hr-web.railway.internal:8080';
     return [
       { source: '/login', destination: `${APP_ORIGIN}/login` },
       { source: '/forgot-password', destination: `${APP_ORIGIN}/forgot-password` },
@@ -70,6 +73,24 @@ const nextConfig: NextConfig = {
       { source: '/invoice/api/platform-admins/:path*', destination: '/api/not-public' },
       { source: '/invoice', destination: `${INVOICE_ORIGIN}/invoice` },
       { source: '/invoice/:path*', destination: `${INVOICE_ORIGIN}/invoice/:path*` },
+      // Qresta HR. Its machine-only admin-management contract
+      // (/api/v1/platform-admins) is refused here and again in
+      // qresta-hr-web, so it stays closed even if one edge is misconfigured;
+      // qresta-api reaches it directly at qresta-hr-api.railway.internal.
+      // The refusals match any version segment and the unversioned spelling,
+      // and come first because rules are tried in order.
+      // /hrsolution/api/v1/platform-sso/redeem stays forwarded on purpose —
+      // the /hrsolution/sso landing page is a browser and has to reach it.
+      { source: '/hrsolution/api/:version/platform-admins', destination: '/api/not-public' },
+      { source: '/hrsolution/api/:version/platform-admins/:path*', destination: '/api/not-public' },
+      { source: '/hrsolution/api/platform-admins', destination: '/api/not-public' },
+      { source: '/hrsolution/api/platform-admins/:path*', destination: '/api/not-public' },
+      // No marketing page for HR here (it is sold from the home page's #hr
+      // section), so the bare path is forwarded too, as for Invoice: it is
+      // the app's own portal chooser. If src/app/hrsolution/page.tsx is ever
+      // added, delete the bare rule, as for FitBizz.
+      { source: '/hrsolution', destination: `${HR_ORIGIN}/hrsolution` },
+      { source: '/hrsolution/:path*', destination: `${HR_ORIGIN}/hrsolution/:path*` },
     ];
   },
 };
