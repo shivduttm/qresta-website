@@ -50,6 +50,14 @@ const nextConfig: NextConfig = {
       // than reach qresta-web.
       { source: '/stall/:path*', destination: `${APP_ORIGIN}/stall/:path*` },
       { source: '/app-assets/:path*', destination: `${APP_ORIGIN}/app-assets/:path*` },
+      // qresta-web's public help centre and status page. Both are linked
+      // from inside the dashboard (Support tickets → Help center, the
+      // incidents console → public status page) and are where restaurants
+      // are sent during an outage, so they must not 404 here. Two rules for
+      // /help for the usual reason: :path* does not match the bare path.
+      { source: '/help', destination: `${APP_ORIGIN}/help` },
+      { source: '/help/:path*', destination: `${APP_ORIGIN}/help/:path*` },
+      { source: '/status', destination: `${APP_ORIGIN}/status` },
       // Only the sub-paths are forwarded: bare /fitbizz is the product's
       // marketing page, rendered by this site (src/app/fitbizz). The app's
       // own root merely redirected to /fitbizz/login anyway.
